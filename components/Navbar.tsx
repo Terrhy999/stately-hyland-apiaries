@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-const Header = () => {
+const Navbar = () => {
   const router = useRouter();
 
   return (
@@ -35,4 +35,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Navbar;
