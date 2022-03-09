@@ -1,14 +1,23 @@
 import Link from "next/link";
 
-const BlogPost = () => {
+interface Post {
+  title: string;
+  date: Date;
+  content: string;
+  slug: string;
+  key?: number;
+}
+
+const BlogPost = ({ title, date, content, slug, key }: Post) => {
   return (
-    <div className="flex flex-col w-full font-lato">
-      <Link href={"/"} passHref={true}>
+    <div className="flex flex-col w-full font-lato" key={key}>
+      <Link href={`/posts/${slug}`} passHref={true}>
         <h1 className="text-[40px] font-bold py-4 text-[#2d2d2d] cursor-pointer">
-          <a>Post Title</a>
+          <a>{title}</a>
         </h1>
       </Link>
-      <div className="flex flex-col w-full text-lg">Post Content</div>
+      <p>{date.toString()}</p>
+      <div className="flex flex-col w-full text-lg">{content}</div>
     </div>
   );
 };
