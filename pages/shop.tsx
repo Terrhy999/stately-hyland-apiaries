@@ -34,6 +34,7 @@ export async function getStaticProps() {
       priceId: priceForProductObject["id"],
       unitAmount: priceForProduct,
       images: product.images,
+      description: product.description ?? "",
     };
   });
   return {
