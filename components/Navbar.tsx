@@ -21,12 +21,19 @@ const Navbar = () => {
           <Link href="/">
             <a
               className={`p-2 mx-1 hover:text-white rounded text-lg ${
-                router.pathname === "/"
-                  ? "text-white"
-                  : "text-[rgba(255, 255, 255, 0.5)]"
+                router.pathname === "/" ? "text-[#1abc9c]" : "text-white"
               }`}
             >
               Home
+            </a>
+          </Link>
+          <Link href="/shop">
+            <a
+              className={`p-2 mx-1 hover:text-white rounded text-lg ${
+                router.pathname === "/shop" ? "text-[#1abc9c]" : "text-white"
+              }`}
+            >
+              Shop
             </a>
           </Link>
         </div>
