@@ -36,6 +36,7 @@ const Navbar = () => {
               Shop
             </a>
           </Link>
+          <div>Cart: </div>
         </div>
       </div>
     </nav>

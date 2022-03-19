@@ -1,15 +1,15 @@
 import "../styles/globals.css";
 import Layout from "../components/Layout";
 import type { AppProps } from "next/app";
-import CartContext from "../context/CartContext";
+import CartProvider from "../context/CartContext";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <CartContext.Provider value={{ cart: [] }}>
+    <CartProvider>
       <Layout>
         <Component {...pageProps} />
       </Layout>
-    </CartContext.Provider>
+    </CartProvider>
   );
 }
 

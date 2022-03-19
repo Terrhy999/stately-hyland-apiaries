@@ -1,8 +1,17 @@
 import Link from "next/link";
 import type { Product } from "../types/Product";
 import Image from "next/image";
+import { CartContext } from "../context/CartContext";
+import { useContext } from "react";
 
 const ProductCard = ({ product }: { product: Product }) => {
+  const productPrice = (product.unitAmount / 100).toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+
+  const { cart, updateCart } = useContext(CartContext);
+
   return (
     <div className="rounded flex flex-col overflow-hidden font-lato bg-[#eee] drop-shadow-md">
       <Link href={`/products/${product.productId}`} passHref={true}>
@@ -17,7 +26,13 @@ const ProductCard = ({ product }: { product: Product }) => {
               {product.name}
             </h4>
           </Link>
-          <span className="text-center self-start">{product.name}</span>
+          <span className="text-center self-start">{productPrice}</span>
+        </div>
+        <div
+          className="w-full cursor-pointer"
+          onClick={() => updateCart(product)}
+        >
+          Click Me!
         </div>
       </div>
     </div>
