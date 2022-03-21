@@ -10,7 +10,7 @@ const ProductCard = ({ product }: { product: Product }) => {
     currency: "USD",
   });
 
-  const { cart, updateCart } = useContext(CartContext);
+  const { cartState, updateCart } = useContext(CartContext);
 
   return (
     <div className="rounded flex flex-col overflow-hidden font-lato bg-[#eee] drop-shadow-md">
@@ -30,7 +30,9 @@ const ProductCard = ({ product }: { product: Product }) => {
         </div>
         <div
           className="w-full cursor-pointer"
-          onClick={() => updateCart(product)}
+          onClick={() =>
+            updateCart(cartState, { type: "addToCart", payload: product })
+          }
         >
           Click Me!
         </div>

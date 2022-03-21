@@ -35,6 +35,7 @@ export async function getStaticProps() {
       unitAmount: priceForProduct,
       images: product.images,
       description: product.description ?? "",
+      quantity: 0,
     };
   });
   return {

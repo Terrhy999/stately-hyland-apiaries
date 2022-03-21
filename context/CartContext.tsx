@@ -1,26 +1,30 @@
 import { createContext, FC, useState } from "react";
+import { Action } from "../types/Action";
 import type { Product } from "../types/Product";
+import cartReducer from "./cartReducer";
 
 export interface CartContextType {
-  cart: Product[];
-  updateCart: (product: Product) => void;
+  cartState: Product[];
+  updateCart: (
+    state: Product[],
+    action: { type: string; payload: Product }
+  ) => void;
 }
 
 const defaultState: CartContextType = {
-  cart: [],
+  cartState: [],
   updateCart: () => null,
 };
 export const CartContext = createContext<CartContextType>(defaultState);
 
 const CartProvider: FC = ({ children }) => {
-  const [cart, setCart] = useState(defaultState.cart);
-  const updateCart = (product: Product) => {
-    setCart([...cart, product]);
-    console.log(cart);
-  };
+  const [cartState, setCartState] = useState(defaultState.cartState);
+
+  const updateCart = (state: Product[], action: Action) =>
+    cartReducer(state, action, setCartState);
 
   return (
-    <CartContext.Provider value={{ cart, updateCart }}>
+    <CartContext.Provider value={{ cartState, updateCart }}>
       {children}
     </CartContext.Provider>
   );

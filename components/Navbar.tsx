@@ -1,8 +1,19 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
+import { Product } from "../types/Product";
 
 const Navbar = () => {
   const router = useRouter();
+
+  const { cartState } = useContext(CartContext);
+
+  const getCartCount = () => {
+    const reducer = (accumulator: number, item: Product) =>
+      accumulator + item.quantity;
+    return cartState.reduce(reducer, 0);
+  };
 
   return (
     <nav className="flex flex-col bg-[url('https://statelyhylandmanor.com/wp-content/uploads/2020/08/cropped-20200605_200148-PANO-scaled-1.jpg')] bg-center bg-no-repeat bg-cover w-full">
@@ -36,7 +47,7 @@ const Navbar = () => {
               Shop
             </a>
           </Link>
-          <div>Cart: </div>
+          <div>Cart({getCartCount()}) </div>
         </div>
       </div>
     </nav>
