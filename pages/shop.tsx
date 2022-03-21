@@ -1,12 +1,13 @@
 import { InferGetStaticPropsType } from "next";
 import Stripe from "stripe";
 import ProductCard from "../components/ProductCard";
+import { Product } from "../types/Product";
 
 export async function getStaticProps() {
-  if (process.env.STRIPE_SECRET_KEY == undefined) {
+  if (process.env["STRIPE_SECRET_KEY"] == undefined) {
     throw new Error("Missing Stripe secret key");
   }
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+  const stripe = new Stripe(process.env["STRIPE_SECRET_KEY"], {
     apiVersion: "2020-08-27",
   });
 
@@ -15,7 +16,7 @@ export async function getStaticProps() {
   const products = productsObject.data;
   const prices = pricesObject.data;
 
-  const productsWithPrices = products.map((product) => {
+  const productsWithPrices: Product[] = products.map((product) => {
     const priceForProductObject = prices.find(
       (price) => price.product === product.id
     );
@@ -28,15 +29,16 @@ export async function getStaticProps() {
       throw new Error("Unit Amount property is null");
     }
 
-    return {
+    const products: Product = {
       name: product.name,
       productId: product.id,
       priceId: priceForProductObject["id"],
       unitAmount: priceForProduct,
       images: product.images,
       description: product.description ?? "",
-      quantity: 0,
     };
+
+    return products;
   });
   return {
     props: { products: productsWithPrices },

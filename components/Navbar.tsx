@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
-import { Product } from "../types/Product";
+import { CartItem } from "../types/CartItem";
 
 const Navbar = () => {
   const router = useRouter();
@@ -10,7 +10,7 @@ const Navbar = () => {
   const { cartState } = useContext(CartContext);
 
   const getCartCount = () => {
-    const reducer = (accumulator: number, item: Product) =>
+    const reducer = (accumulator: number, item: CartItem) =>
       accumulator + item.quantity;
     return cartState.reduce(reducer, 0);
   };

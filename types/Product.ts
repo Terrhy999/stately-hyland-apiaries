@@ -5,5 +5,4 @@ export interface Product {
   priceId: string;
   unitAmount: number;
   description: string;
-  quantity: number;
 }

@@ -16,7 +16,11 @@ const ProductCard = ({ product }: { product: Product }) => {
     <div className="rounded flex flex-col overflow-hidden font-lato bg-[#eee] drop-shadow-md">
       <Link href={`/products/${product.productId}`} passHref={true}>
         <div className="aspect-[3/4] relative">
-          <Image src={product.images[0]} alt="Product Image" layout="fill" />
+          <Image
+            src={product.images[0] ?? ""}
+            alt="Product Image"
+            layout="fill"
+          />
         </div>
       </Link>
       <div className="w-full flex flex-col items-center justify-between">
@@ -34,7 +38,7 @@ const ProductCard = ({ product }: { product: Product }) => {
             updateCart(cartState, { type: "addToCart", payload: product })
           }
         >
-          Click Me!
+          Add to Cart
         </div>
       </div>
     </div>
