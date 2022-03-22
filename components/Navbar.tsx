@@ -38,16 +38,24 @@ const Navbar = () => {
               Home
             </a>
           </Link>
-          <Link href="/shop">
+          <Link href="/Shop">
             <a
               className={`p-2 mx-1 hover:text-white rounded text-lg ${
-                router.pathname === "/shop" ? "text-[#1abc9c]" : "text-white"
+                router.pathname === "/Shop" ? "text-[#1abc9c]" : "text-white"
               }`}
             >
               Shop
             </a>
           </Link>
-          <div>Cart({getCartCount()}) </div>
+          <Link href="/Cart">
+            <a
+              className={`p-2 mx-1 hover:text-white rounded text-lg ${
+                router.pathname === "/Cart" ? "text-[#1abc9c]" : "text-white"
+              }`}
+            >
+              Cart({getCartCount()})
+            </a>
+          </Link>
         </div>
       </div>
     </nav>

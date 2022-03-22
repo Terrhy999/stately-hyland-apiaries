@@ -45,7 +45,7 @@ export async function getStaticProps() {
   };
 }
 
-const shop = ({ products }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Shop = ({ products }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <div className="min-w-full flex flex-col justify-center">
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 p-3 gap-5">
@@ -57,4 +57,4 @@ const shop = ({ products }: InferGetStaticPropsType<typeof getStaticProps>) => {
   );
 };
 
-export default shop;
+export default Shop;

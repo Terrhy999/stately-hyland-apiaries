@@ -14,10 +14,10 @@ interface Params extends ParsedUrlQuery {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  if (process.env.STRIPE_SECRET_KEY == undefined) {
+  if (process.env["STRIPE_SECRET_KEY"] == undefined) {
     throw new Error("Missing Stripe secret key");
   }
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+  const stripe = new Stripe(process.env["STRIPE_SECRET_KEY"], {
     apiVersion: "2020-08-27",
   });
 
@@ -28,10 +28,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps = async (context: GetStaticPropsContext) => {
-  if (process.env.STRIPE_SECRET_KEY == undefined) {
+  if (process.env["STRIPE_SECRET_KEY"] == undefined) {
     throw new Error("Missing Stripe secret key");
   }
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+  const stripe = new Stripe(process.env["STRIPE_SECRET_KEY"], {
     apiVersion: "2020-08-27",
   });
 
@@ -40,6 +40,11 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
 
   const pricesObject = await stripe.prices.list({ product: product.id });
   const priceObject = pricesObject.data[0];
+
+  if (!priceObject) {
+    throw new Error("Cannot find Price object for specified Product ID");
+  }
+
   const price = priceObject["unit_amount"];
   const priceId = priceObject["id"];
 
@@ -76,7 +81,11 @@ const ProductPage = ({
             className="aspect-[3/4] w-1/2"
           ></img> */}
           <div className="aspect-[3/4] relative">
-            <Image src={product.images[0]} alt="Product Image" layout="fill" />
+            <Image
+              src={product.images[0] ?? ""}
+              alt="Product Image"
+              layout="fill"
+            />
           </div>
 
           <div className="flex flex-col w-1/2 p-3">

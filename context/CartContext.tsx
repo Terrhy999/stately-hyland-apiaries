@@ -1,15 +1,11 @@
 import { createContext, FC, useState } from "react";
 import { Action } from "../types/Action";
-import type { Product } from "../types/Product";
 import type { CartItem } from "../types/CartItem";
 import cartReducer from "./cartReducer";
 
 export interface CartContextType {
   cartState: CartItem[];
-  updateCart: (
-    state: CartItem[],
-    action: { type: string; payload: Product }
-  ) => void;
+  updateCart: (state: CartItem[], action: Action) => void;
 }
 
 const defaultState: CartContextType = {

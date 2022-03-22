@@ -1,6 +1,6 @@
 import { Product } from "./Product";
 
 export interface Action {
-  type: string;
+  type: "addToCart" | "removeFromCart" | "decreaseQuantity";
   payload: Product;
 }

@@ -37,8 +37,11 @@ const cartReducer = (
       if (!product) {
         throw new Error("Product doesn't exist in cart");
       }
-      product.quantity++;
+      product.quantity--;
       setCartState(state);
+      state.map((product) =>
+        console.log(product.product.name, product.quantity)
+      );
       break;
     }
 
