@@ -35,17 +35,13 @@ const cartReducer = (
       break;
     }
     case "decreaseQuantity": {
-      const cartItem = state.filter(
-        (product) => product.product.productId === action.payload.productId
-      )[0];
-      if (!cartItem) {
-        throw new Error("Product doesn't exist in cart");
-      }
-      cartItem.quantity--;
-      setCartState(state);
-      state.map((product) =>
-        console.log(product.product.name, product.quantity)
-      );
+      const newState = [...state].map((cartItem) => {
+        if (cartItem.product.productId === action.payload.productId) {
+          cartItem.quantity--;
+        }
+        return cartItem;
+      });
+      setCartState(newState);
       break;
     }
 
