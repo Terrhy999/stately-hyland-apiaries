@@ -45,7 +45,15 @@ const Cart = () => {
               <button className="h-8 w-8 text-center border border-black">
                 {cartItem.quantity}
               </button>
-              <button className="h-8 w-8 text-center text-white bg-black border border-black">
+              <button
+                className="h-8 w-8 text-center text-white bg-black border border-black"
+                onClick={() =>
+                  updateCart(cartState, {
+                    type: "addToCart",
+                    payload: cartItem.product,
+                  })
+                }
+              >
                 +
               </button>
             </div>

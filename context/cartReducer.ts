@@ -9,18 +9,22 @@ const cartReducer = (
 ) => {
   switch (action.type) {
     case "addToCart": {
-      const productExists = state.find(
+      const cartItemExists = state.find(
         (product) => product.product.productId === action.payload.productId
       );
-      if (productExists) {
-        productExists.quantity++;
+      let newState = [];
+      if (cartItemExists) {
+        newState = [...state].map((cartItem) => {
+          if (cartItem.product.productId === cartItemExists.product.productId) {
+            cartItem.quantity++;
+          }
+          return cartItem;
+        });
       } else {
-        state.push({ product: action.payload, quantity: 1 });
+        newState = [...state, { product: action.payload, quantity: 1 }];
+        // state.push({ product: action.payload, quantity: 1 });
       }
-      setCartState(state);
-      state.map((product) =>
-        console.log(product.product.name, product.quantity)
-      );
+      setCartState(newState);
       break;
     }
     case "removeFromCart": {
@@ -31,13 +35,13 @@ const cartReducer = (
       break;
     }
     case "decreaseQuantity": {
-      const product = state.find(
+      const cartItem = state.filter(
         (product) => product.product.productId === action.payload.productId
-      );
-      if (!product) {
+      )[0];
+      if (!cartItem) {
         throw new Error("Product doesn't exist in cart");
       }
-      product.quantity--;
+      cartItem.quantity--;
       setCartState(state);
       state.map((product) =>
         console.log(product.product.name, product.quantity)
