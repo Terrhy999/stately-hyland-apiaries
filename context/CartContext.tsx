@@ -26,9 +26,11 @@ const CartProvider: FC = ({ children }) => {
     }
   }, []);
 
-  const updateCart = (state: CartItem[], action: Action) =>
-    cartReducer(state, action, setCartState);
-
+  const updateCart = (state: CartItem[], action: Action) => {
+    const newState = cartReducer(state, action);
+    setCartState(newState);
+    localStorage.setItem("cart", JSON.stringify(newState));
+  };
   return (
     <CartContext.Provider value={{ cartState, updateCart }}>
       {children}

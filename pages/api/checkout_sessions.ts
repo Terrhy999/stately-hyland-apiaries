@@ -2,11 +2,11 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 import Stripe from "stripe";
 
-if (!process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY) {
+if (!process.env["NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY"]) {
   throw new Error("Missing Stripe secret key");
 }
 
-const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY, {
+const stripe = new Stripe(process.env["NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY"], {
   apiVersion: "2020-08-27",
 });
 
@@ -30,7 +30,7 @@ export default async function handler(
         });
       res.status(200).json(session);
     } catch (err) {
-      res.status(500).json({ statusCode: 500, message: err.message });
+      res.status(500).json({ statusCode: 500, message: err });
     }
   }
 }

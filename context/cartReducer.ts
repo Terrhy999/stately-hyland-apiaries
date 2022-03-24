@@ -1,12 +1,7 @@
-import { Dispatch, SetStateAction } from "react";
 import { Action } from "../types/Action";
 import { CartItem } from "../types/CartItem";
 
-const cartReducer = (
-  state: CartItem[],
-  action: Action,
-  setCartState: Dispatch<SetStateAction<CartItem[]>>
-) => {
+const cartReducer = (state: CartItem[], action: Action): CartItem[] => {
   switch (action.type) {
     case "addToCart": {
       const cartItemExists = state.find(
@@ -24,14 +19,16 @@ const cartReducer = (
         newState = [...state, { product: action.payload, quantity: 1 }];
         // state.push({ product: action.payload, quantity: 1 });
       }
-      setCartState(newState);
+      // setCartState(newState);
+      return newState;
       break;
     }
     case "removeFromCart": {
       const newState = state.filter(
         (product) => product.product.productId !== action.payload.productId
       );
-      setCartState(newState);
+      // setCartState(newState);
+      return newState;
       break;
     }
     case "decreaseQuantity": {
@@ -46,12 +43,10 @@ const cartReducer = (
           return cartItem;
         })
         .filter((cartItem) => cartItem.quantity > 0);
-      setCartState(newState);
+      // setCartState(newState);
+      return newState;
       break;
     }
-
-    default:
-      break;
   }
 };
 
