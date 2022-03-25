@@ -1,11 +1,11 @@
 import { createContext, FC, useEffect, useState } from "react";
 import { Action } from "../types/Action";
-import type { CartItem } from "../types/CartItem";
+import type { ICartItem } from "../types/CartItem";
 import cartReducer from "./cartReducer";
 
 export interface CartContextType {
-  cartState: CartItem[];
-  updateCart: (state: CartItem[], action: Action) => void;
+  cartState: ICartItem[];
+  updateCart: (state: ICartItem[], action: Action) => void;
 }
 
 const defaultState: CartContextType = {
@@ -26,7 +26,7 @@ const CartProvider: FC = ({ children }) => {
     }
   }, []);
 
-  const updateCart = (state: CartItem[], action: Action) => {
+  const updateCart = (state: ICartItem[], action: Action) => {
     const newState = cartReducer(state, action);
     setCartState(newState);
     localStorage.setItem("cart", JSON.stringify(newState));

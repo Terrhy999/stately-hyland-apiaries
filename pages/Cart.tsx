@@ -1,69 +1,52 @@
-import Image from "next/image";
 import { useContext } from "react";
+import CartItem from "../components/CartItem";
 import { CartContext } from "../context/CartContext";
+import type { ICartItem } from "../types/CartItem";
 
 const Cart = () => {
-  const { cartState, updateCart } = useContext(CartContext);
+  const { cartState } = useContext(CartContext);
 
-  const getReadablePrice = (price: number, quantity: number) => {
-    const dollarPrice = price / 100;
-    const totalDollarPrice = dollarPrice * quantity;
-    return totalDollarPrice.toLocaleString("en-us", {
-      style: "currency",
-      currency: "USD",
+  const getTotalPrice = () => {
+    const reducer = (accumulator: number, item: ICartItem) =>
+      accumulator + (item.product.unitAmount * item.quantity) / 100;
+    const total = cartState
+      .reduce(reducer, 0)
+      .toLocaleString("en-US", { style: "currency", currency: "USD" });
+    return total;
+  };
+
+  const cartData = cartState.map((item) => ({
+    price: item.product.priceId,
+    quantity: item.quantity,
+  }));
+
+  const checkout = async (cartData: { price: string; quantity: number }[]) => {
+    const res = await fetch("/api/checkout_sessions", {
+      method: "POST",
+      body: JSON.stringify(cartData),
     });
+    const json = await res.json();
+    const redirectUrl = json.url;
+    window.location.href = redirectUrl;
   };
 
   return (
-    <div className="flex flex-col w-full space-y-3 items-center p-3">
-      {cartState.map((cartItem) => (
-        <div
-          key={cartItem.product.productId}
-          className="flex flex-row w-5/6 max-w-2xl h-24 items-center"
-        >
-          <div className="aspect-[3/4] relative h-full">
-            <Image
-              src={cartItem.product.images[0] ?? ""}
-              alt="Product Image"
-              layout="fill"
-            />
-          </div>
-          <div className="w-full h-full flex flex-row justify-between">
-            <p className=" basis-1/3 flex pl-3">{cartItem.product.name}</p>
-            <div className="flex justify-ce">
-              <button
-                className="h-8 w-8 text-center text-white bg-black border border-black"
-                onClick={() =>
-                  updateCart(cartState, {
-                    type: "decreaseQuantity",
-                    payload: cartItem.product,
-                  })
-                }
-              >
-                -
-              </button>
-              <button className="h-8 w-8 text-center border border-black">
-                {cartItem.quantity}
-              </button>
-              <button
-                className="h-8 w-8 text-center text-white bg-black border border-black"
-                onClick={() =>
-                  updateCart(cartState, {
-                    type: "addToCart",
-                    payload: cartItem.product,
-                  })
-                }
-              >
-                +
-              </button>
-            </div>
-            <p className="basis-1/3 flex">
-              {getReadablePrice(cartItem.product.unitAmount, cartItem.quantity)}
-            </p>
-          </div>
+    <>
+      <div className="flex flex-col space-y-3 items-center p-3 font-lato">
+        {cartState.map((cartItem) => (
+          <CartItem key={cartItem.product.productId} cartItem={cartItem} />
+        ))}
+        <div className="flex flex-row w-full max-w-lg justify-center space-x-3 items-center">
+          <h2 className="text-xl">Subtotal: {getTotalPrice()}</h2>
+          <button
+            className="bg-black text-white p-2 w-2/3 rounded-lg"
+            onClick={() => checkout(cartData)}
+          >
+            Proceed to Checkout
+          </button>
         </div>
-      ))}
-    </div>
+      </div>
+    </>
   );
 };
 

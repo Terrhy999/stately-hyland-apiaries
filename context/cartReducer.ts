@@ -1,7 +1,7 @@
 import { Action } from "../types/Action";
-import { CartItem } from "../types/CartItem";
+import { ICartItem } from "../types/CartItem";
 
-const cartReducer = (state: CartItem[], action: Action): CartItem[] => {
+const cartReducer = (state: ICartItem[], action: Action): ICartItem[] => {
   switch (action.type) {
     case "addToCart": {
       const cartItemExists = state.find(
