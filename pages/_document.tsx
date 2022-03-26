@@ -7,7 +7,7 @@ import Document, {
 } from "next/document";
 
 class MyDocument extends Document {
-  static async getInitialProps(ctx: DocumentContext) {
+  static override async getInitialProps(ctx: DocumentContext) {
     const originalRendererPage = ctx.renderPage;
 
     ctx.renderPage = () =>
@@ -21,7 +21,7 @@ class MyDocument extends Document {
     return initialProps;
   }
 
-  render() {
+  override render() {
     return (
       <Html>
         <Head>
