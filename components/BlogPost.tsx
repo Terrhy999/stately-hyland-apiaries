@@ -16,7 +16,7 @@ const BlogPost = ({ title, date, content, slug, key }: Post) => {
           <a>{title}</a>
         </h1>
       </Link>
-      <p>{date.toString()}</p>
+      <p>{date.toLocaleDateString()}</p>
       <div className="flex flex-col w-full text-lg">{content}</div>
     </div>
   );

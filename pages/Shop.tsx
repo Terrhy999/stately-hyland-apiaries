@@ -11,7 +11,7 @@ export async function getStaticProps() {
     apiVersion: "2020-08-27",
   });
 
-  const productsObject = await stripe.products.list();
+  const productsObject = await stripe.products.list({ active: true });
   const pricesObject = await stripe.prices.list();
   const products = productsObject.data;
   const prices = pricesObject.data;
