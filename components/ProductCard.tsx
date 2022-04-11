@@ -32,14 +32,14 @@ const ProductCard = ({ product }: { product: Product }) => {
           </Link>
           <span className="text-center self-start">{productPrice}</span>
         </div>
-        <div
-          className="w-full cursor-pointer"
+        <button
+          className="w-full bg-black text-white p-2 hover:text-[#1abc9c]"
           onClick={() =>
             updateCart(cartState, { type: "addToCart", payload: product })
           }
         >
           Add to Cart
-        </div>
+        </button>
       </div>
     </div>
   );

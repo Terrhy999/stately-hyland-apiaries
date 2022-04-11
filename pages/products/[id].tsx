@@ -69,39 +69,32 @@ const ProductPage = ({
   product,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
-    <div className="flex flex-row justify-center w-full h-full">
-      <div className="flex flex-col w-11/12 max-w-4xl">
-        <h1 className="text-4xl text-black font-semibold py-3">
-          {product.name}
-        </h1>
+    <div className="flex flex-row justify-center w-full">
+      <div className="flex flex-row w-11/12 max-w-4xl space-x-3 p-3">
+        <div className="aspect-[3/4] relative">
+          <Image
+            src={product.images[0] ?? ""}
+            alt="Product Image"
+            layout="fill"
+          />
+        </div>
 
-        <div className="flex flex-row">
-          {/* <img
-            src={`${process.env.NEXT_PUBLIC_DIRECTUS_URL}/assets/${product["image1"]}`}
-            className="aspect-[3/4] w-1/2"
-          ></img> */}
-          <div className="aspect-[3/4] relative">
-            <Image
-              src={product.images[0] ?? ""}
-              alt="Product Image"
-              layout="fill"
-            />
-          </div>
-
-          <div className="flex flex-col w-1/2 p-3">
-            <p className="text-xl">
-              {(product.unitAmount / 100).toLocaleString("en-US", {
-                style: "currency",
-                currency: "USD",
-              })}
-            </p>
-            <p className="underline text-lg pb-1">Description:</p>
-            <p>{product.description}</p>
-            <p>{product.name}</p>
-            <div className="flex flex-row w-full rounded items-center bg-black justify-center cursor-pointer">
-              <span className="text-white text-lg">Add To Cart</span>
-              <FaCartPlus className="text-white pl-2 w-9 h-9" />
-            </div>
+        <div className="flex flex-col w-1/2">
+          <h1 className="text-4xl text-black font-semibold py-3">
+            {product.name}
+          </h1>
+          <p className="text-xl">
+            {(product.unitAmount / 100).toLocaleString("en-US", {
+              style: "currency",
+              currency: "USD",
+            })}
+          </p>
+          <p className="underline text-lg pb-1">Description:</p>
+          <p>{product.description}</p>
+          <p>{product.name}</p>
+          <div className="flex flex-row w-full rounded items-center bg-black justify-center cursor-pointer">
+            <span className="text-white text-lg">Add To Cart</span>
+            <FaCartPlus className="text-white pl-2 w-9 h-9" />
           </div>
         </div>
       </div>
