@@ -18,20 +18,21 @@ const CartItem = ({ cartItem }: { cartItem: ICartItem }) => {
   return (
     <div
       key={cartItem.product.productId}
-      className="flex flex-row w-full max-w-2xl h-36 items-center"
+      className="flex flex-row w-full h-48 items-center py-2"
     >
       <div className="aspect-[3/4] relative h-full rounded overflow-hidden shrink-0">
         <Image
           src={cartItem.product.images[0] ?? ""}
           alt="Product Image"
           layout="fill"
+          objectFit="cover"
         />
       </div>
-      <div className="w-full h-full pt-3 flex flex-row justify-between">
-        <p className=" basis-1/3 flex text-lg justify-center">
+      <div className="w-full h-full flex flex-col justify-between pl-2 sm:flex-row sm:items-center">
+        <p className="flex justify-center text-lg sm:basis-1/2 sm:justify-start sm:text-xl">
           {cartItem.product.name}
         </p>
-        <div className="flex basis-1/3 justify-center">
+        <div className="flex justify-center sm:basis-1/6">
           <button
             className="h-8 w-8 text-center text-white bg-black border border-black"
             onClick={() =>
@@ -58,7 +59,7 @@ const CartItem = ({ cartItem }: { cartItem: ICartItem }) => {
             +
           </button>
         </div>
-        <p className="basis-1/3 flex text-lg justify-center">
+        <p className="flex text-lg justify-center sm:justify-end sm:basis-1/6">
           {getReadablePrice(cartItem.product.unitAmount, cartItem.quantity)}
         </p>
       </div>

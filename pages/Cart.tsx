@@ -31,22 +31,24 @@ const Cart = () => {
   };
 
   return (
-    <>
-      <div className="flex flex-col space-y-3 items-center p-3 font-lato">
+    <div className="flex flex-col font-lato w-full items-center justify-center p-2">
+      <div className="flex flex-col w-full items-center p-3 font-lato divide-y divide-gray-600">
         {cartState.map((cartItem) => (
           <CartItem key={cartItem.product.productId} cartItem={cartItem} />
         ))}
-        <div className="flex flex-row w-full max-w-lg justify-center space-x-3 items-center">
-          <h2 className="text-xl">Subtotal: {getTotalPrice()}</h2>
-          <button
-            className="bg-black text-white p-2 w-2/3 rounded-lg"
-            onClick={() => checkout(cartData)}
-          >
-            Proceed to Checkout
-          </button>
-        </div>
       </div>
-    </>
+      <div className="flex flex-row w-full p-3 items-center pb-4 justify-between">
+        <button
+          className="bg-black text-white text-lg font-bold p-2 w-2/3 rounded-lg"
+          onClick={() => checkout(cartData)}
+        >
+          Proceed to Checkout
+        </button>
+        <p className="flex-grow text-lg text-center sm:text-right">
+          {getTotalPrice()}
+        </p>
+      </div>
+    </div>
   );
 };
 

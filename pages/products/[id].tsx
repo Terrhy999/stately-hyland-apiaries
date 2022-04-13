@@ -6,8 +6,9 @@ import {
 import { ParsedUrlQuery } from "querystring";
 import Stripe from "stripe";
 import { Product } from "../../types/Product";
-import { FaCartPlus } from "react-icons/fa";
 import Image from "next/image";
+import { CartContext } from "../../context/CartContext";
+import { useContext } from "react";
 
 interface Params extends ParsedUrlQuery {
   id: string;
@@ -68,35 +69,40 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
 const ProductPage = ({
   product,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  return (
-    <div className="flex flex-row justify-center w-full">
-      <div className="flex flex-row w-11/12 max-w-4xl space-x-3 p-3">
-        <div className="aspect-[3/4] relative">
-          <Image
-            src={product.images[0] ?? ""}
-            alt="Product Image"
-            layout="fill"
-          />
-        </div>
+  const getPriceLocaleString = () =>
+    (product.unitAmount / 100).toLocaleString("en-US", {
+      style: "currency",
+      currency: "USD",
+    });
 
-        <div className="flex flex-col w-1/2">
-          <h1 className="text-4xl text-black font-semibold py-3">
-            {product.name}
-          </h1>
-          <p className="text-xl">
-            {(product.unitAmount / 100).toLocaleString("en-US", {
-              style: "currency",
-              currency: "USD",
-            })}
-          </p>
-          <p className="underline text-lg pb-1">Description:</p>
-          <p>{product.description}</p>
-          <p>{product.name}</p>
-          <div className="flex flex-row w-full rounded items-center bg-black justify-center cursor-pointer">
-            <span className="text-white text-lg">Add To Cart</span>
-            <FaCartPlus className="text-white pl-2 w-9 h-9" />
-          </div>
-        </div>
+  const { cartState, updateCart } = useContext(CartContext);
+
+  return (
+    <div className="flex flex-col justify-center p-3 w-full md:flex-row">
+      <div className="aspect-[5/4] relative rounded overflow-hidden flex-shrink-0 md:aspect-[3/4] md:min-w-[40%]">
+        <Image
+          src={product.images[0] ?? ""}
+          alt="Product Image"
+          layout="fill"
+          objectFit="cover"
+          objectPosition="bottom"
+        />
+      </div>
+
+      <div className="flex flex-col font-lato p-1 md:pl-2">
+        <h1 className="text-3xl text-black font-bold pt-1 md:pt-0">
+          {product.name}
+        </h1>
+        <p className="text-lg">{getPriceLocaleString()}</p>
+        <p className="py-3 flex-grow">{product.description}</p>
+        <button
+          className="bg-black text-white font-bold p-2 rounded hover:text-[#1abc9c]"
+          onClick={() =>
+            updateCart(cartState, { type: "addToCart", payload: product })
+          }
+        >
+          Add to Cart
+        </button>
       </div>
     </div>
   );
