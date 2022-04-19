@@ -32,9 +32,6 @@ const cartReducer = (state: ICartItem[], action: Action): ICartItem[] => {
       break;
     }
     case "decreaseQuantity": {
-      // const cartItemExists = state.find(
-      //   cartItem => cartItem.product.productId === action.payload.productId
-      // )
       const newState = [...state]
         .map((cartItem) => {
           if (cartItem.product.productId === action.payload.productId) {
