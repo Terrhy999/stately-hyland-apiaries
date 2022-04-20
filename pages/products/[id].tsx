@@ -78,8 +78,8 @@ const ProductPage = ({
   const { cartState, updateCart } = useContext(CartContext);
 
   return (
-    <div className="flex flex-col justify-center p-3 w-full md:flex-row">
-      <div className="aspect-[5/4] relative rounded overflow-hidden flex-shrink-0 md:aspect-[3/4] md:min-w-[40%]">
+    <div className="flex flex-col justify-center p-3 w-full lg:flex-row lg:max-w-5xl lg:bg-white lg:drop-shadow-md lg:rounded lg:mt-3">
+      <div className="aspect-[5/4] relative rounded overflow-hidden flex-shrink-0 lg:aspect-[3/4] lg:min-w-[40%]">
         <Image
           src={product.images[0] ?? ""}
           alt="Product Image"
@@ -89,8 +89,8 @@ const ProductPage = ({
         />
       </div>
 
-      <div className="flex flex-col font-lato p-1 md:pl-2">
-        <h1 className="text-3xl text-black font-bold pt-1 md:pt-0">
+      <div className="flex flex-col font-lato lg:pl-4">
+        <h1 className="text-3xl text-black font-bold pt-1 lg:pt-0">
           {product.name}
         </h1>
         <p className="text-lg">{getPriceLocaleString()}</p>
