@@ -8,7 +8,8 @@ import Stripe from "stripe";
 import { Product } from "../../types/Product";
 import Image from "next/image";
 import { CartContext } from "../../context/CartContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
 
 interface Params extends ParsedUrlQuery {
   id: string;
@@ -75,11 +76,12 @@ const ProductPage = ({
       currency: "USD",
     });
 
+  const [quantity, setQuantity] = useState(1);
   const { cartState, updateCart } = useContext(CartContext);
 
   return (
-    <div className="flex flex-col justify-center p-3 w-full lg:flex-row lg:max-w-5xl lg:bg-white lg:drop-shadow-md lg:rounded lg:mt-3">
-      <div className="aspect-[5/4] relative rounded overflow-hidden flex-shrink-0 lg:aspect-[3/4] lg:min-w-[40%]">
+    <div className="flex flex-col p-3 lg:p-5 w-full lg:flex-row lg:max-h-[600px]">
+      <div className="aspect-[5/4] mb-4 lg:mb-0 relative rounded overflow-hidden flex-shrink-0 lg:aspect-[3/4] lg:min-w-[40%]">
         <Image
           src={product.images[0] ?? ""}
           alt="Product Image"
@@ -89,20 +91,44 @@ const ProductPage = ({
         />
       </div>
 
-      <div className="flex flex-col font-lato lg:pl-4">
-        <h1 className="text-3xl text-black font-bold pt-1 lg:pt-0">
+      <div className="flex flex-col h-full font-lato lg:pl-14">
+        <h2 className="text-4xl text-black font-bold pb-2 uppercase lg:pt-0">
           {product.name}
-        </h1>
-        <p className="text-lg">{getPriceLocaleString()}</p>
-        <p className="py-3 flex-grow">{product.description}</p>
-        <button
-          className="bg-black text-white font-bold p-2 rounded hover:text-[#1abc9c]"
-          onClick={() =>
-            updateCart(cartState, { type: "addToCart", payload: product })
-          }
-        >
-          Add to Cart
-        </button>
+        </h2>
+        <p className="text-xl">{getPriceLocaleString()}</p>
+        <p className="py-5 text-lg flex-grow">{product.description}</p>
+        <div className="flex flex-col md:flex-row">
+          <div className="flex flex-row justify-between items-center text-center border bg-white border-black p-3 mb-3 md:mb-0 md:mr-3">
+            <span className="pl-2 pr-4">Quantity</span>
+            <div className="flex flex-row justify-center items-center">
+              <FaAngleLeft
+                className="mx-2 h-6 w-6 cursor-pointer hover:text-[#1abc9c]"
+                onClick={() => setQuantity(quantity - 1)}
+              />
+              <input
+                type="numeric"
+                value={quantity}
+                className="w-6 text-center"
+                onChange={(e) => setQuantity(Number(e.target.value))}
+              />
+              <FaAngleRight
+                className="mx-2 h-6 w-6 cursor-pointer hover:text-[#1abc9c]"
+                onClick={() => setQuantity(quantity + 1)}
+              />
+            </div>
+          </div>
+          <button
+            className="bg-black text-white font-bold p-3 flex-grow hover:text-[#1abc9c]"
+            onClick={() =>
+              updateCart(cartState, {
+                type: "addToCart",
+                payload: { product, quantity },
+              })
+            }
+          >
+            Add to Cart
+          </button>
+        </div>
       </div>
     </div>
   );

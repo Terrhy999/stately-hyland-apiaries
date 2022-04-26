@@ -16,7 +16,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-[#1d1d1d] flex flex-col items-center w-full">
+    <nav className="bg-[#1d1d1d] flex flex-col items-center w-full lg:mb-10">
       {router.pathname === "/" && (
         <div
           className={`flex flex-row justify-center bg-no-repeat bg-cover bg-bottom w-full

@@ -31,22 +31,22 @@ const Cart = () => {
   };
 
   return (
-    <div className="flex flex-col font-lato w-full items-center justify-center p-2">
-      <div className="flex flex-col w-full items-center p-3 font-lato divide-y divide-gray-600">
-        {cartState.map((cartItem) => (
-          <CartItem key={cartItem.product.productId} cartItem={cartItem} />
-        ))}
-      </div>
-      <div className="flex flex-row w-full p-3 items-center pb-4 justify-between">
+    <div className="flex flex-col lg:flex-row p-4 font-lato w-full">
+      <div className="flex flex-row lg:flex-col w-full items-center lg:items-end justify-between mb-3 lg:justify-start lg:order-last">
+        <p className="w-40 p-2 bg-white border flex-grow lg:flex-grow-0 lg:w-4/5 lg:mb-3 border-black text-lg text-center">
+          {getTotalPrice()}
+        </p>
         <button
-          className="bg-black text-white text-lg font-bold p-2 w-2/3 rounded-lg"
+          className="bg-black border border-black text-white text-lg font-bold p-2 w-2/3 lg:w-4/5"
           onClick={() => checkout(cartData)}
         >
           Proceed to Checkout
         </button>
-        <p className="flex-grow text-lg text-center sm:text-right">
-          {getTotalPrice()}
-        </p>
+      </div>
+      <div className="flex flex-col w-full space-y-4 items-center font-lato">
+        {cartState.map((cartItem) => (
+          <CartItem key={cartItem.product.productId} cartItem={cartItem} />
+        ))}
       </div>
     </div>
   );

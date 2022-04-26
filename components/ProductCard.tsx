@@ -26,7 +26,7 @@ const ProductCard = ({ product }: { product: Product }) => {
         </div>
       </Link>
       <div className="w-full flex flex-col items-center justify-between">
-        <div className="w-full p-4">
+        <div className="w-full p-3">
           <Link href={`/products/${product.productId}`} passHref={true}>
             <h4 className="font-semibold text-lg cursor-pointer w-full">
               {product.name}
@@ -34,9 +34,12 @@ const ProductCard = ({ product }: { product: Product }) => {
           </Link>
           <div className="mb-4">{productPrice}</div>
           <button
-            className="bg-black text-white font-bold w-full p-2 rounded hover:text-[#1abc9c]"
+            className="bg-black text-white font-bold w-full p-2 hover:text-[#1abc9c]"
             onClick={() =>
-              updateCart(cartState, { type: "addToCart", payload: product })
+              updateCart(cartState, {
+                type: "addToCart",
+                payload: { product, quantity: 1 },
+              })
             }
           >
             Add to Cart

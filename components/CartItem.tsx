@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useContext } from "react";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { CartContext } from "../context/CartContext";
 import { ICartItem } from "../types/CartItem";
 
@@ -18,50 +19,58 @@ const CartItem = ({ cartItem }: { cartItem: ICartItem }) => {
   return (
     <div
       key={cartItem.product.productId}
-      className="flex flex-row w-full h-48 items-center py-2"
+      className="flex flex-row w-full h-40 items-center"
     >
-      <div className="aspect-[3/4] relative h-full rounded overflow-hidden shrink-0">
+      <div className="aspect-[3/3] relative h-full rounded overflow-hidden shrink-0">
         <Image
           src={cartItem.product.images[0] ?? ""}
           alt="Product Image"
           layout="fill"
           objectFit="cover"
+          objectPosition="bottom"
         />
       </div>
-      <div className="w-full h-full flex flex-col justify-between pl-2 sm:flex-row sm:items-center">
-        <p className="flex justify-center text-lg sm:basis-1/2 sm:justify-start sm:text-xl">
-          {cartItem.product.name}
-        </p>
-        <div className="flex justify-center sm:basis-1/6">
-          <button
-            className="h-8 w-8 text-center text-white bg-black border border-black"
-            onClick={() =>
-              updateCart(cartState, {
-                type: "decreaseQuantity",
-                payload: cartItem.product,
-              })
-            }
-          >
-            -
-          </button>
-          <button className="h-8 w-8 text-center border border-black">
-            {cartItem.quantity}
-          </button>
-          <button
-            className="h-8 w-8 text-center text-white bg-black border border-black"
-            onClick={() =>
-              updateCart(cartState, {
-                type: "addToCart",
-                payload: cartItem.product,
-              })
-            }
-          >
-            +
-          </button>
+      <div className="w-full h-full flex flex-col justify-between pl-2 sm:flex-row sm:items-center lg:items-start">
+        <div>
+          <p className="flex text-lg sm:basis-1/2">{cartItem.product.name}</p>
+          <p className="flex font-bold sm:basis-1/6">
+            {getReadablePrice(cartItem.product.unitAmount, cartItem.quantity)}
+          </p>
         </div>
-        <p className="flex text-lg justify-center sm:justify-end sm:basis-1/6">
-          {getReadablePrice(cartItem.product.unitAmount, cartItem.quantity)}
-        </p>
+        <div className="flex flex-row justify-center items-center text-center border bg-white border-black p-3">
+          <div className="flex flex-row justify-center items-center">
+            <span>Quantity</span>
+            <FaAngleLeft
+              className="mx-2 h-6 w-6 cursor-pointer hover:text-[#1abc9c]"
+              onClick={() =>
+                updateCart(cartState, {
+                  type: "decreaseQuantity",
+                  payload: cartItem,
+                })
+              }
+            />
+            <input
+              type="numeric"
+              className="w-6 text-center"
+              value={cartItem.quantity}
+              onChange={(e) =>
+                updateCart(cartState, {
+                  type: "setQuantity",
+                  payload: { ...cartItem, quantity: Number(e.target.value) },
+                })
+              }
+            />
+            <FaAngleRight
+              className="mx-2 h-6 w-6 cursor-pointer hover:text-[#1abc9c]"
+              onClick={() =>
+                updateCart(cartState, {
+                  type: "increaseQuantity",
+                  payload: cartItem,
+                })
+              }
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
