@@ -1,7 +1,8 @@
 ---
 title: Spring 2021 Honey Harvest
-date: "2022-04-26"
+date: '2022-04-26'
 thumbnail: /images/posts/Backyard_Hives.webp
+published: true
 ---
 
 <!-----
@@ -32,7 +33,9 @@ Conversion notes:
 
 I’ll walk you through “pulling” our Spring 2021 Honey from the hives at Stately Hyland Apiaries!
 
-![alt_text](https://drive.google.com/uc?export=view&id=1_1zCSdXcAshW5tyPrOzkH_dnSRHF0ePO "image_tooltip")
+![image1.webp]({{site.baseurl}}/posts/image1.webp)
+
+
 Marquette Hen and Bees at Stately Hyland Manor
 
 Spring 2021 is here at Stately Hyland Apiaries, and it was time to “pull” our honey.
