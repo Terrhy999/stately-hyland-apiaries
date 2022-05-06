@@ -1,40 +1,34 @@
 import fs from "fs";
-import matter from "gray-matter";
+import { join } from "path";
+import type { Meta } from "../types/Meta";
 import PostCard from "../components/PostCard";
-import type { Post, Frontmatter } from "../types/Post";
 
 export async function getStaticProps() {
-  const files = fs.readdirSync("posts");
+  const postsDirectory = join(process.cwd(), "pages/posts");
+  const files = fs.readdirSync(postsDirectory);
 
-  const posts = files.map((fileName) => {
-    const slug = fileName.replace(".md", "");
-    const readFile = fs.readFileSync(`posts/${fileName}`, "utf-8");
-    const { data, content } = matter(readFile);
-    const frontmatter: Frontmatter = {
-      title: data["title"],
-      date: data["date"],
-      thumbnail: data["thumbnail"],
-    };
-    const post: Post = {
-      frontmatter,
-      content,
-      slug,
-    };
-    return post;
-  });
+  const metaData: Meta[] = await Promise.all(
+    files.map(async (file) => {
+      const { meta }: { meta: Meta } = await import(`../pages/posts/${file}`);
+      return meta;
+    })
+  );
 
-  return {
-    props: {
-      posts,
-    },
-  };
+  return { props: { metaData } };
 }
 
-const Home = ({ posts }: { posts: Post[] }) => {
+const Home = ({ metaData }: { metaData: Meta[] }) => {
   return (
-    <div className="w-full grid grid-cols sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 p-3 gap-5">
-      {posts.map((post) => (
-        <PostCard post={post} key={post.slug} />
+    <div className="w-full h-min grid grid-cols sm:grid-cols-2 lg:grid-cols-3 p-3 gap-5">
+      {metaData.map((post, i) => (
+        <PostCard
+          key={i}
+          title={post.title}
+          date={post.date}
+          caption={post.caption}
+          thumbnail={post.thumbnail}
+          slug={post.slug}
+        />
       ))}
     </div>
   );

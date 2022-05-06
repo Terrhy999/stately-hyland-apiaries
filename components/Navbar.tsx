@@ -33,10 +33,18 @@ const Navbar = () => {
         </div>
       )}
       <div className="font-lato text-white py-2 flex justify-between w-full max-w-7xl">
-        <p className={`p-2 mx-1 text-xl font-bold sm:hidden`}>SHA</p>
-        <p className={`p-2 mx-1 text-xl font-bold hidden sm:block`}>
-          Stately Hyland Apiaries
-        </p>
+        <Link href={"/"} passHref={true}>
+          <p className={`p-2 mx-1 text-xl font-bold cursor-pointer sm:hidden`}>
+            SHA
+          </p>
+        </Link>
+        <Link href={"/"} passHref={true}>
+          <p
+            className={`p-2 mx-1 text-xl font-bold cursor-pointer hidden sm:block`}
+          >
+            Stately Hyland Apiaries
+          </p>
+        </Link>
         <div className="flex flex-row">
           <Link href="/">
             <a
@@ -62,7 +70,7 @@ const Navbar = () => {
                 router.pathname === "/Cart" ? "text-[#1abc9c]" : ""
               }`}
             >
-              Cart({getCartCount()})
+              Cart ({getCartCount()})
             </a>
           </Link>
         </div>
