@@ -28,8 +28,8 @@ export default async function handler(
             allowed_countries: ["US"],
           },
           shipping_rates: ["shr_1JPwtaKnxKfZHThpPxgjhI86"],
-          success_url: `${req.headers.origin}/?sucess=true`,
-          cancel_url: `${req.headers.origin}/?canceled=true`,
+          success_url: `${req.headers.origin}`,
+          cancel_url: `${req.headers.origin}/Cart`,
         });
       res.status(200).json(session);
     } catch (err) {

@@ -3,4 +3,5 @@ export interface Meta {
   date: string;
   caption: string;
   thumbnail: string;
+  slug: string;
 }

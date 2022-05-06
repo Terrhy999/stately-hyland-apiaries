@@ -1,19 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Meta } from "../types/Meta";
 
-const PostCard = ({
-  title,
-  caption,
-  thumbnail,
-}: {
-  title: string;
-  caption: string;
-  thumbnail?: string;
-}) => {
+const PostCard = ({ title, date, caption, thumbnail, slug }: Meta) => {
   return (
-    <div className="rounded h-fit overflow-hidden flex flex-col font-lato bg-white drop-shadow-md">
-      <Link href={`/`} passHref={true}>
-        <div className="aspect-[3/2] cursor-pointer relative overflow-hidden">
+    <Link href={`/posts/${slug}`} passHref={true}>
+      <div className="rounded cursor-pointer overflow-hidden flex flex-col font-lato drop-shadow-md">
+        <div className="aspect-[3/2] flex-shrink-0 relative overflow-hidden">
           <Image
             src={thumbnail || "https://via.placeholder.com/300"}
             alt="Post Thumbnail"
@@ -22,12 +15,13 @@ const PostCard = ({
             objectPosition="bottom"
           />
         </div>
-      </Link>
-      <div className="w-full p-3">
-        <h2 className="font-semibold text-lg cursor-pointer w-full">{title}</h2>
-        <p>{caption}</p>
+        <div className="w-full p-3 bg-white rounded">
+          <h2 className="font-semibold text-lg w-full pb-2">{title}</h2>
+          <p className="text-sm pb-2">{date}</p>
+          <p>{caption}</p>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

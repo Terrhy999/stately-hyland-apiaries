@@ -39,7 +39,7 @@ const CartItem = ({ cartItem }: { cartItem: ICartItem }) => {
         </div>
         <div className="flex flex-row justify-center items-center text-center border bg-white border-black p-3">
           <div className="flex flex-row justify-center items-center">
-            <span>Quantity</span>
+            <span className="hidden sm:block">Quantity</span>
             <FaAngleLeft
               className="mx-2 h-6 w-6 cursor-pointer hover:text-[#1abc9c]"
               onClick={() =>
