@@ -31,7 +31,7 @@ const Cart = () => {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row p-4 font-lato w-full">
+    <div className="flex flex-col lg:flex-row font-lato w-full">
       <div className="flex flex-row lg:flex-col w-full items-center lg:items-end justify-between mb-3 lg:justify-start lg:order-last">
         <p className="w-40 p-2 bg-white border flex-grow lg:flex-grow-0 lg:w-4/5 lg:mb-3 border-black text-lg text-center">
           {getTotalPrice()}

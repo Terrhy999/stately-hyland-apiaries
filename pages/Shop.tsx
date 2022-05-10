@@ -47,11 +47,14 @@ export async function getStaticProps() {
 
 const Shop = ({ products }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
-    <div className="min-w-full flex flex-col justify-center">
-      <div className="grid grid-cols sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 p-3 gap-5">
-        {products.map((product) => (
-          <ProductCard product={product} key={product.productId} />
-        ))}
+    <div className="w-full">
+      <h2 className="font-lato text-3xl font-bold pb-5">Shop</h2>
+      <div className="min-w-full flex flex-col justify-center">
+        <div className="grid grid-cols sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+          {products.map((product) => (
+            <ProductCard product={product} key={product.productId} />
+          ))}
+        </div>
       </div>
     </div>
   );

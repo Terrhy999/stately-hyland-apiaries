@@ -16,7 +16,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-[#1d1d1d] flex flex-col items-center w-full lg:mb-10">
+    <nav className="bg-[#1d1d1d] flex-col items-center w-full lg:mb-10 hidden sm:flex">
       {router.pathname === "/" && (
         <div
           className={`flex flex-row justify-center bg-no-repeat bg-cover bg-bottom w-full
@@ -52,7 +52,25 @@ const Navbar = () => {
                 router.pathname === "/" ? "text-[#1abc9c]" : ""
               }`}
             >
-              Home
+              Blog
+            </a>
+          </Link>
+          <Link href="/Resources">
+            <a
+              className={`p-2 mx-1 hover:text-white rounded text-lg ${
+                router.pathname === "/Resources" ? "text-[#1abc9c]" : ""
+              }`}
+            >
+              Beekeeping Resources
+            </a>
+          </Link>
+          <Link href="/About">
+            <a
+              className={`p-2 mx-1 hover:text-white rounded text-lg ${
+                router.pathname === "/About" ? "text-[#1abc9c]" : ""
+              }`}
+            >
+              About
             </a>
           </Link>
           <Link href="/Shop">
