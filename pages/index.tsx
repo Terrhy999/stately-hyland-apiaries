@@ -19,17 +19,20 @@ export async function getStaticProps() {
 
 const Home = ({ metaData }: { metaData: Meta[] }) => {
   return (
-    <div className="w-full h-min grid grid-cols sm:grid-cols-2 lg:grid-cols-3 p-3 gap-5">
-      {metaData.map((post, i) => (
-        <PostCard
-          key={i}
-          title={post.title}
-          date={post.date}
-          caption={post.caption}
-          thumbnail={post.thumbnail}
-          slug={post.slug}
-        />
-      ))}
+    <div className="w-full">
+      <h2 className="text-3xl font-lato font-bold pb-5">Blog Posts</h2>
+      <div className="w-full h-min grid grid-cols sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {metaData.map((post, i) => (
+          <PostCard
+            key={i}
+            title={post.title}
+            date={post.date}
+            caption={post.caption}
+            thumbnail={post.thumbnail}
+            slug={post.slug}
+          />
+        ))}
+      </div>
     </div>
   );
 };
