@@ -1,4 +1,5 @@
 import type { Meta } from "../types/Meta";
+import ScrollToTop from "./ScrollToTop";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -12,10 +13,13 @@ const PostLayout = ({
   meta: Meta;
 }) => {
   return (
-    <div className="prose prose-lg prose-blockquote:border-gray-500 prose-blockquote:bg-gray-300 prose-blockquote:overflow-auto font-lato">
-      <div className="text-4xl font-bold">{meta.title}</div>
-      {children}
-    </div>
+    <>
+      <div className="prose prose-lg prose-blockquote:border-gray-500 prose-blockquote:bg-gray-300 prose-blockquote:overflow-auto font-lato">
+        <div className="text-4xl font-bold">{meta.title}</div>
+        {children}
+        <ScrollToTop />
+      </div>
+    </>
   );
 };
 

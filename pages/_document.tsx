@@ -34,7 +34,7 @@ class MyDocument extends Document {
             rel="stylesheet"
           />
         </Head>
-        <body className="h-full">
+        <body className="h-full scroll-smooth">
           <Main />
           <NextScript />
         </body>

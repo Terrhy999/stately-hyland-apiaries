@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { useContext } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
 import { CartContext } from "../context/CartContext";
 import { ICartItem } from "../types/CartItem";
 
@@ -41,7 +42,11 @@ const CartItem = ({ cartItem }: { cartItem: ICartItem }) => {
           <div className="flex flex-row justify-center items-center">
             <span className="hidden sm:block">Quantity</span>
             <FaAngleLeft
-              className="mx-2 h-6 w-6 cursor-pointer hover:text-[#1abc9c]"
+              className={`mx-2 h-6 w-6 cursor-pointer hover:text-[#1abc9c] ${
+                cartItem.quantity == 1
+                  ? "text-gray-300 pointer-events-none"
+                  : ""
+              }`}
               onClick={() =>
                 updateCart(cartState, {
                   type: "decreaseQuantity",
@@ -50,21 +55,37 @@ const CartItem = ({ cartItem }: { cartItem: ICartItem }) => {
               }
             />
             <input
-              type="numeric"
               className="w-6 text-center"
               value={cartItem.quantity}
-              onChange={(e) =>
-                updateCart(cartState, {
-                  type: "setQuantity",
-                  payload: { ...cartItem, quantity: Number(e.target.value) },
-                })
-              }
+              onChange={(e) => {
+                if (
+                  Number(e.target.value) > 99 ||
+                  Number(e.target.value) < 1 ||
+                  isNaN(Number(e.target.value))
+                ) {
+                  return;
+                } else {
+                  updateCart(cartState, {
+                    type: "setQuantity",
+                    payload: { ...cartItem, quantity: Number(e.target.value) },
+                  });
+                }
+              }}
             />
             <FaAngleRight
               className="mx-2 h-6 w-6 cursor-pointer hover:text-[#1abc9c]"
               onClick={() =>
                 updateCart(cartState, {
                   type: "increaseQuantity",
+                  payload: cartItem,
+                })
+              }
+            />
+            <MdDelete
+              className="mx-2 h-6 w-6 cursor-pointer hover:text-[#1amc9c]"
+              onClick={() =>
+                updateCart(cartState, {
+                  type: "removeFromCart",
                   payload: cartItem,
                 })
               }
