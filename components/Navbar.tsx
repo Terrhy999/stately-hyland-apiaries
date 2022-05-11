@@ -16,7 +16,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-[#1d1d1d] flex-col items-center w-full lg:mb-10 hidden sm:flex">
+    <nav className="bg-[#1d1d1d] flex-col items-center w-full lg:mb-10 hidden md:flex">
       {router.pathname === "/" && (
         <div
           className={`flex flex-row justify-center bg-no-repeat bg-cover bg-bottom w-full
@@ -27,7 +27,7 @@ const Navbar = () => {
               STATELY HYLAND APIARIES
             </h6>
             <h2 className="text-white font-Raleway text-xl text-center p-4">
-              Seasoned, Orginizatioal Wisdom ~ from a mom of three boys.
+              Seasoned, Organizational Wisdom ~ from a mom of three boys.
             </h2>
           </div>
         </div>

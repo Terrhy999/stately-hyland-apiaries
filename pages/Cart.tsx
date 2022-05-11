@@ -1,54 +1,37 @@
+import Head from "next/head";
 import { useContext } from "react";
 import CartItem from "../components/CartItem";
+import CheckoutButton from "../components/CheckoutButton";
 import { CartContext } from "../context/CartContext";
-import type { ICartItem } from "../types/CartItem";
 
 const Cart = () => {
   const { cartState } = useContext(CartContext);
 
-  const getTotalPrice = () => {
-    const reducer = (accumulator: number, item: ICartItem) =>
-      accumulator + (item.product.unitAmount * item.quantity) / 100;
-    const total = cartState
-      .reduce(reducer, 0)
-      .toLocaleString("en-US", { style: "currency", currency: "USD" });
-    return total;
-  };
-
-  const cartData = cartState.map((item) => ({
-    price: item.product.priceId,
-    quantity: item.quantity,
-  }));
-
-  const checkout = async (cartData: { price: string; quantity: number }[]) => {
-    const res = await fetch("/api/checkout_sessions", {
-      method: "POST",
-      body: JSON.stringify(cartData),
-    });
-    const json = await res.json();
-    const redirectUrl = json.url;
-    window.location.href = redirectUrl;
-  };
-
   return (
-    <div className="flex flex-col lg:flex-row font-lato w-full">
-      <div className="flex flex-row lg:flex-col w-full items-center lg:items-end justify-between mb-3 lg:justify-start lg:order-last">
-        <p className="w-40 p-2 bg-white border flex-grow lg:flex-grow-0 lg:w-4/5 lg:mb-3 border-black text-lg text-center">
-          {getTotalPrice()}
-        </p>
-        <button
-          className="bg-black border border-black text-white text-lg font-bold p-2 w-2/3 lg:w-4/5"
-          onClick={() => checkout(cartData)}
-        >
-          Proceed to Checkout
-        </button>
+    <>
+      <Head>
+        <title>Cart - SHA</title>
+      </Head>
+      <div className="flex flex-col lg:flex-row font-lato w-full">
+        {cartState.length !== 0 ? (
+          <>
+            <CheckoutButton />
+            <div className="flex flex-col w-full space-y-4 items-center font-lato">
+              {cartState.map((cartItem) => (
+                <CartItem
+                  key={cartItem.product.productId}
+                  cartItem={cartItem}
+                />
+              ))}
+            </div>
+          </>
+        ) : (
+          <p className="self-center sm:self-start text-center w-full text-lg">
+            Cart is empty
+          </p>
+        )}
       </div>
-      <div className="flex flex-col w-full space-y-4 items-center font-lato">
-        {cartState.map((cartItem) => (
-          <CartItem key={cartItem.product.productId} cartItem={cartItem} />
-        ))}
-      </div>
-    </div>
+    </>
   );
 };
 

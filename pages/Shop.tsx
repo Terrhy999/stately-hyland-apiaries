@@ -1,4 +1,5 @@
 import { InferGetStaticPropsType } from "next";
+import Head from "next/head";
 import Stripe from "stripe";
 import ProductCard from "../components/ProductCard";
 import { Product } from "../types/Product";
@@ -47,16 +48,21 @@ export async function getStaticProps() {
 
 const Shop = ({ products }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
-    <div className="w-full">
-      <h2 className="font-lato text-3xl font-bold pb-5">Shop</h2>
-      <div className="min-w-full flex flex-col justify-center">
-        <div className="grid grid-cols sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-          {products.map((product) => (
-            <ProductCard product={product} key={product.productId} />
-          ))}
+    <>
+      <Head>
+        <title>Shop - SHA</title>
+      </Head>
+      <div className="w-full">
+        <h2 className="font-lato text-3xl font-bold pb-5">Shop</h2>
+        <div className="min-w-full flex flex-col justify-center">
+          <div className="grid grid-cols sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+            {products.map((product) => (
+              <ProductCard product={product} key={product.productId} />
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -9,10 +9,10 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <div className="h-full min-h-screen bg-gray-200 flex flex-col items-center justify-between">
+    <div className="h-full min-h-screen bg-gray-200 flex relative flex-col items-center justify-between">
       <Navbar />
       <NavbarMobile />
-      <main className="w-full h-full flex flex-grow justify-center p-5 max-w-7xl">
+      <main className="w-full flex flex-grow justify-center p-5 max-w-7xl">
         {children}
       </main>
       <Footer />

@@ -19,7 +19,7 @@ const NavbarMobile = () => {
   };
 
   return (
-    <nav className="sm:hidden relative flex flex-col w-full bg-[#1d1d1d] font-lato z-30 sticky top-0">
+    <nav className="md:hidden flex flex-col w-full bg-[#1d1d1d] font-lato z-30 sticky top-0">
       <div className="flex w-full z-30 bg-[#1d1d1d] justify-between text-white p-1 px-5">
         <Hamburger toggled={isOpen} toggle={setOpen} color="white" />
         <Link href={"/"} passHref={true}>
