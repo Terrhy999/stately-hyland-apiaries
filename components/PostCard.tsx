@@ -15,7 +15,7 @@ const PostCard = ({ title, date, caption, thumbnail, slug }: Meta) => {
             objectPosition="bottom"
           />
         </div>
-        <div className="w-full p-3 bg-white rounded">
+        <div className="w-full p-3 bg-white flex-grow rounded">
           <h2 className="font-semibold text-lg w-full pb-2">{title}</h2>
           <p className="text-sm pb-2">{date}</p>
           <p>{caption}</p>
