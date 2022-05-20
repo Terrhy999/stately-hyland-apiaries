@@ -3,13 +3,9 @@ import type { Product } from "../types/Product";
 import Image from "next/image";
 import { CartContext } from "../context/CartContext";
 import { useContext } from "react";
+import { getPriceLocaleString } from "../utils";
 
 const ProductCard = ({ product }: { product: Product }) => {
-  const productPrice = (product.unitAmount / 100).toLocaleString("en-US", {
-    style: "currency",
-    currency: "USD",
-  });
-
   const { cartState, updateCart } = useContext(CartContext);
 
   return (
@@ -32,7 +28,7 @@ const ProductCard = ({ product }: { product: Product }) => {
               {product.name}
             </h4>
           </Link>
-          <div className="mb-4">{productPrice}</div>
+          <div className="mb-4">{getPriceLocaleString(product)}</div>
           <button
             className="bg-black text-white font-bold w-full p-2 hover:text-[#1abc9c]"
             onClick={() =>

@@ -1,8 +1,4 @@
-import {
-  GetStaticPaths,
-  GetStaticPropsContext,
-  InferGetStaticPropsType,
-} from "next";
+import { GetStaticPaths, GetStaticPropsContext } from "next";
 import { ParsedUrlQuery } from "querystring";
 import Stripe from "stripe";
 import { Product } from "../../types/Product";
@@ -10,6 +6,7 @@ import Image from "next/image";
 import { CartContext } from "../../context/CartContext";
 import { useContext, useState } from "react";
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
+import { getPriceLocaleString } from "../../utils";
 
 interface Params extends ParsedUrlQuery {
   id: string;
@@ -61,21 +58,18 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
     priceId: priceId,
     unitAmount: price,
     description: product.description ?? "",
+    metadata: {
+      weight: Number(product.metadata["weight"] || 0),
+      type: product.metadata["type"] || "",
+      color: product.metadata["color"] || "",
+    },
   };
   return {
     props: { product: productWithPrice },
   };
 };
 
-const ProductPage = ({
-  product,
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const getPriceLocaleString = () =>
-    (product.unitAmount / 100).toLocaleString("en-US", {
-      style: "currency",
-      currency: "USD",
-    });
-
+const ProductPage = ({ product }: { product: Product }) => {
   const [quantity, setQuantity] = useState(1);
   const { cartState, updateCart } = useContext(CartContext);
 
@@ -95,7 +89,7 @@ const ProductPage = ({
         <h2 className="text-4xl text-black font-bold pb-2 uppercase lg:pt-0">
           {product.name}
         </h2>
-        <p className="text-xl">{getPriceLocaleString()}</p>
+        <p className="text-xl">{getPriceLocaleString(product)}</p>
         <p className="py-5 text-lg flex-grow">{product.description}</p>
         <div className="flex flex-col md:flex-row">
           <div className="flex flex-row justify-between items-center text-center border bg-white border-black p-3 mb-3 md:mb-0 md:mr-3">

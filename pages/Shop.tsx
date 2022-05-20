@@ -1,4 +1,3 @@
-import { InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import Stripe from "stripe";
 import ProductCard from "../components/ProductCard";
@@ -13,8 +12,9 @@ export async function getStaticProps() {
   });
 
   const productsObject = await stripe.products.list({ active: true });
-  const pricesObject = await stripe.prices.list();
   const products = productsObject.data;
+
+  const pricesObject = await stripe.prices.list();
   const prices = pricesObject.data;
 
   const productsWithPrices: Product[] = products.map((product) => {
@@ -51,7 +51,7 @@ export async function getStaticProps() {
   };
 }
 
-const Shop = ({ products }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Shop = ({ products }: { products: Product[] }) => {
   return (
     <>
       <Head>
