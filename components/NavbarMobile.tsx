@@ -34,7 +34,7 @@ const NavbarMobile = () => {
         </Link>
       </div>
       <div
-        className={`text-white bg-[#1d1d1d] w-full z-20 mt-14 -translate-y-full absolute flex flex-col p-3 transition-transform ease-in-out duration-500 ${
+        className={`text-white bg-[#1d1d1d] w-full z-20 mt-14 -translate-y-full absolute flex flex-col p-3 transform-gpu transition-transform ease-in-out duration-500 ${
           isOpen ? "transform-none" : ""
         }`}
         onClick={() => setOpen(false)}

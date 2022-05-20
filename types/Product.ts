@@ -5,4 +5,9 @@ export interface Product {
   priceId: string;
   unitAmount: number;
   description: string;
+  metadata: {
+    weight: number;
+    color: string;
+    type: string;
+  };
 }

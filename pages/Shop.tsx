@@ -37,6 +37,11 @@ export async function getStaticProps() {
       unitAmount: priceForProduct,
       images: product.images,
       description: product.description ?? "",
+      metadata: {
+        weight: Number(product.metadata["weight"]) || 0,
+        color: product.metadata["color"] || "",
+        type: product.metadata["type"] || "",
+      },
     };
 
     return products;
@@ -54,6 +59,7 @@ const Shop = ({ products }: InferGetStaticPropsType<typeof getStaticProps>) => {
       </Head>
       <div className="w-full">
         <h2 className="font-lato text-3xl font-bold pb-5">Shop</h2>
+        <div></div>
         <div className="min-w-full flex flex-col justify-center">
           <div className="grid grid-cols sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
             {products.map((product) => (

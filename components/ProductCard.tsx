@@ -17,7 +17,7 @@ const ProductCard = ({ product }: { product: Product }) => {
       <Link href={`/products/${product.productId}`} passHref={true}>
         <div className="aspect-[1/1] cursor-pointer relative overflow-hidden">
           <Image
-            src={product.images[0] ?? ""}
+            src={product.images[0] || "https://via.placeholder.com/291"}
             alt="Product Image"
             layout="fill"
             objectFit="cover"
