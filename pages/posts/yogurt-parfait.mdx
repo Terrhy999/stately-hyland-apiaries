@@ -1,0 +1,38 @@
+import PostLayout from "../../components/postTools/PostLayout";
+import PostImage from "../../components/postTools/PostImage";
+
+export const meta = {
+  title: "Everybody loves a Parfait",
+  date: "2022-05-20",
+  caption:
+    "Making a yogurt parfait with ⚜Stately Hyland Apiaries⚜ Summer 🌸Blossom Honey~ and with my homemade yogurt of course!",
+  thumbnail: "/images/posts/yogurt-parfait/image1.png",
+  slug: "yogurt-parfait",
+};
+
+Making a yogurt parfait with ⚜Stately Hyland Apiaries⚜ Summer 🌸Blossom Honey~ and with my homemade yogurt of course!
+
+<PostImage
+  src={"/images/posts/yogurt-parfait/image1.png"}
+  height="615"
+  width="820"
+  justify="center"
+  caption="Marquette Hen and Bees at Stately Hyland Manor"
+/>
+
+After fasting this morning, I saw that it had already passed 1:00 pm and I hadn't been reminded to eat by pangs of hunger yet. Fasting, at least for me, has decreased my hunger levels immensely and has allowed me to make unhurried consistent choices of what to eat for meals now. I realized that it was time to eat, but as I was not hungry, I decided on a light lunch, hence the yogurt parfait.
+
+<span className="underline">
+  Stately Hyland <strike>Apiaries</strike> _Kitchens_ ~ Yogurt Parfait
+</span>
+
+- Stately Hyland Manor Homemade Yogurt ([Recipe](https://statelyhylandmanor.com/home-made-yogurt/))
+- Bob's Red Mill (Gluten Free Tropical) [Muesli](https://www.bobsredmill.com/gluten-free-tropical-muesli.html)
+- Stately Hyland Apiaries Summer Blossom [Honey](https://statelyhylandmanor.com/product/%e2%9a%9c-sha-%e2%9a%9c-12-ounce-skep-gift-honey-for-rosh-hashanah/)
+- No mess [Honey Dispenser](https://www.amazon.com/Mrs-Andersons-Baking-Dispenser-Capacity/dp/B0017KBDC6/ref=as_li_ss_tl?keywords=glass+syrup+dispenser&qid=1585167990&s=home-garden&sr=1-4&linkCode=sl1&tag=statecom04-20&linkId=a14ff155ad7a32551debd416764044d3)
+
+Complete with my homemade yogurt, lunchtime sustenance with a delightful display! A rainy cool day in the apiary, adding our summer blossom honey to my parfait! [Video](https://youtu.be/qD2H3_90k_8)
+
+And as we all know, everybody loves a parfait!
+
+export default ({ children }) => <PostLayout meta={meta} children={children} />;

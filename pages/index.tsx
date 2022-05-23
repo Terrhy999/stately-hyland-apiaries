@@ -1,6 +1,6 @@
 import fs from "fs";
 import { join } from "path";
-import type { Meta } from "../types/Meta";
+import type { IMeta } from "../types";
 import PostCard from "../components/PostCard";
 import Head from "next/head";
 
@@ -8,9 +8,9 @@ export async function getStaticProps() {
   const postsDirectory = join(process.cwd(), "pages/posts");
   const files = fs.readdirSync(postsDirectory);
 
-  const metaData: Meta[] = await Promise.all(
+  const metaData: IMeta[] = await Promise.all(
     files.map(async (file) => {
-      const { meta }: { meta: Meta } = await import(`../pages/posts/${file}`);
+      const { meta }: { meta: IMeta } = await import(`../pages/posts/${file}`);
       return meta;
     })
   );
@@ -18,7 +18,7 @@ export async function getStaticProps() {
   return { props: { metaData } };
 }
 
-const Home = ({ metaData }: { metaData: Meta[] }) => {
+const Home = ({ metaData }: { metaData: IMeta[] }) => {
   return (
     <>
       <Head>

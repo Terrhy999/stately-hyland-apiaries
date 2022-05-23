@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { CartContext } from "../context/CartContext";
-import { ICartItem } from "../types/CartItem";
+import { ICartItem } from "../types";
 
 const CartItem = ({ cartItem }: { cartItem: ICartItem }) => {
   const { cartState, updateCart } = useContext(CartContext);

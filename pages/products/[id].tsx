@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticPropsContext } from "next";
 import { ParsedUrlQuery } from "querystring";
 import Stripe from "stripe";
-import { Product } from "../../types/Product";
+import { IProduct } from "../../types";
 import Image from "next/image";
 import { CartContext } from "../../context/CartContext";
 import { useContext, useState } from "react";
@@ -51,7 +51,7 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
     throw new Error("No unit price for this product");
   }
 
-  const productWithPrice: Product = {
+  const productWithPrice: IProduct = {
     name: product.name,
     productId: product.id,
     images: product.images,
@@ -69,7 +69,7 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
   };
 };
 
-const ProductPage = ({ product }: { product: Product }) => {
+const ProductPage = ({ product }: { product: IProduct }) => {
   const [quantity, setQuantity] = useState(1);
   const { cartState, updateCart } = useContext(CartContext);
 

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
-import { ICartItem } from "../types/CartItem";
+import { ICartItem } from "../types";
 
 const Navbar = () => {
   const router = useRouter();

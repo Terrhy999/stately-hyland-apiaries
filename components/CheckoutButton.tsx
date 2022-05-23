@@ -1,6 +1,6 @@
 import { CartContext } from "../context/CartContext";
 import { useContext } from "react";
-import type { ICartItem } from "../types/CartItem";
+import type { ICartItem } from "../types";
 
 const CheckoutButton = () => {
   const { cartState } = useContext(CartContext);

@@ -1,5 +1,5 @@
-import type { Meta } from "../types/Meta";
-import ScrollToTop from "./ScrollToTop";
+import type { IMeta } from "../../types";
+import ScrollToTop from "../ScrollToTop";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -10,7 +10,7 @@ const PostLayout = ({
   meta,
 }: {
   children: LayoutProps;
-  meta: Meta;
+  meta: IMeta;
 }) => {
   return (
     <>

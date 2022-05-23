@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Stripe from "stripe";
 import ProductCard from "../components/ProductCard";
-import { Product } from "../types/Product";
+import { IProduct } from "../types";
 
 export async function getStaticProps() {
   if (process.env["STRIPE_SECRET_KEY"] == undefined) {
@@ -17,7 +17,7 @@ export async function getStaticProps() {
   const pricesObject = await stripe.prices.list();
   const prices = pricesObject.data;
 
-  const productsWithPrices: Product[] = products.map((product) => {
+  const productsWithPrices: IProduct[] = products.map((product) => {
     const priceForProductObject = prices.find(
       (price) => price.product === product.id
     );
@@ -30,7 +30,7 @@ export async function getStaticProps() {
       throw new Error("Unit Amount property is null");
     }
 
-    const products: Product = {
+    const products: IProduct = {
       name: product.name,
       productId: product.id,
       priceId: priceForProductObject["id"],
@@ -51,7 +51,7 @@ export async function getStaticProps() {
   };
 }
 
-const Shop = ({ products }: { products: Product[] }) => {
+const Shop = ({ products }: { products: IProduct[] }) => {
   return (
     <>
       <Head>

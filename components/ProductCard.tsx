@@ -1,11 +1,11 @@
 import Link from "next/link";
-import type { Product } from "../types/Product";
+import type { IProduct } from "../types";
 import Image from "next/image";
 import { CartContext } from "../context/CartContext";
 import { useContext } from "react";
 import { getPriceLocaleString } from "../utils";
 
-const ProductCard = ({ product }: { product: Product }) => {
+const ProductCard = ({ product }: { product: IProduct }) => {
   const { cartState, updateCart } = useContext(CartContext);
 
   return (

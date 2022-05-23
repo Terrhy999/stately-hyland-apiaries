@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { Meta } from "../types/Meta";
+import type { IMeta } from "../types";
 
-const PostCard = ({ title, date, caption, thumbnail, slug }: Meta) => {
+const PostCard = ({ title, date, caption, thumbnail, slug }: IMeta) => {
   return (
     <Link href={`/posts/${slug}`} passHref={true}>
       <div className="rounded cursor-pointer overflow-hidden flex flex-col font-lato drop-shadow-md">
