@@ -1,5 +1,7 @@
 import PostLayout from "../../components/postTools/PostLayout";
 import PostImage from "../../components/postTools/PostImage";
+import PostImageAndText from "../../components/postTools/PostImageAndText";
+import ImagesGrid from "../../components/postTools/ImagesGrid";
 import Image from "next/image";
 
 export const meta = {
@@ -53,22 +55,51 @@ The addition of burlap to the lower part of the chicken run allows some shade an
   caption="Stately Hyland Manor ~ Gardens ~ is slowly being enhanced!"
 />
 
-Taking a rest from the day's activities, enjoying the meandering Marquette Hens!
+export const image3Paragraphs = [
+  "Taking a rest from the day's activities, enjoying the meandering Marquette Hens!",
+  "They have the whole backyard to explore while I quietly ‘supervise’ them.  I have spied wandering foxes across the river who thankfully have enough to keep them occupied and are not currently seeking out my roaming hens. Still, I stand guard.",
+];
 
-They have the whole backyard to explore while I quietly 'supervise' them. I have spied wandering foxes across the river who thankfully have enough to keep them occupied and are not currently seeking out my roaming hens. Still, I stand guard.
+<PostImageAndText
+  src="/images/posts/what-a-difference/image3.png"
+  width={820}
+  height={615}
+  paragraphs={image3Paragraphs}
+  imageJustify="left"
+  percentageWidth={40}
+/>
 
-There can never be too many pictures of the Marquette Hens, right? From my
-original five hens since 2016, I have three hens left.
+export const image11Paragraphs = [
+  "There can never be too many pictures of the Marquette Hens, right? From my original five hens since 2016, I have three hens left. Priscilla, Prudence and not pictured here, Penelope.",
+  "Stay tuned for new hens to join the flock here in June!!",
+];
 
-_Priscilla, Prudence_ and not pictured here, _Penelope._
-
-Stay tuned for new hens to join the flock here in June!!
+<PostImageAndText
+  src="/images/posts/what-a-difference/image11.png"
+  width={820}
+  height={615}
+  paragraphs={image11Paragraphs}
+  imageJustify="right"
+  percentageWidth={40}
+/>
 
 But I digress, onto the gardens progress…
 
-_Chicken run window boxes. The only way to keep the chickens from eating the plants!_
-
-_(Potato vines and Coleus)_
+<ImagesGrid
+  images={[
+    {
+      src: "/images/posts/what-a-difference/image3.png",
+      width: 820,
+      height: 615,
+    },
+    {
+      src: "/images/posts/what-a-difference/image11.png",
+      width: 820,
+      height: 615,
+    },
+  ]}
+  caption="Chicken run window boxes. The only way to keep the chickens from eating the plants! (Potato vines and Coleus)"
+/>
 
 Hidden from sight is a very clever design of mine for 'self watering pots.' I left the plants in their original plastic containers, but underneath I have nested them into quart and pint food storage containers. But first, I threaded some twine into the bottom of the plant container to act as a wick to bring the excess water up to the roots!
 

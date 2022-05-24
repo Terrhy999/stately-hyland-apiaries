@@ -41,6 +41,15 @@ export interface IPostImage {
   caption?: string;
 }
 
+export interface IPostImageAndText {
+  src: string;
+  width: number;
+  height: number;
+  paragraphs: string[];
+  imageJustify?: "left" | "right";
+  percentageWidth?: number;
+}
+
 export interface ICartItem {
   product: IProduct;
   quantity: number;

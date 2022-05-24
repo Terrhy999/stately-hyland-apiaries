@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { PostImage } from "../../types/PostImage";
+import { IPostImage } from "../../types";
 
 const PostImage = ({
   src,
@@ -8,7 +8,7 @@ const PostImage = ({
   alt,
   justify,
   caption,
-}: PostImage) => {
+}: IPostImage) => {
   return (
     <div className={`flex flex-col items-${justify} justify-${justify} py-3`}>
       <Image src={src} height={height} width={width} alt={alt} />
