@@ -10,7 +10,9 @@ const PostImageAndText = ({
   percentageWidth = 40,
 }: IPostImageAndText) => {
   const flexDirection =
-    imageJustify == "left" ? "flex-row" : "flex-row-reverse space-x-reverse";
+    imageJustify == "left"
+      ? "md:flex-row"
+      : "md:flex-row-reverse md:space-x-reverse";
 
   const getPercentageWidth = (percentage: number): string => {
     if (percentage < 1 || percentage > 100) {
@@ -21,9 +23,11 @@ const PostImageAndText = ({
   };
 
   return (
-    <div className={`w-full flex ${flexDirection} items-center space-x-3 py-5`}>
+    <div
+      className={`w-full flex flex-col ${flexDirection} items-center md:space-x-3 py-5`}
+    >
       <div
-        className="relative shrink-0 h-fit"
+        className="hidden relative shrink-0 h-fit"
         style={{ flexBasis: `${getPercentageWidth(percentageWidth)}` }}
       >
         <Image
@@ -33,6 +37,9 @@ const PostImageAndText = ({
           width={width}
           height={height}
         />
+      </div>
+      <div>
+        <Image src={src} alt="" width={width} height={height} />
       </div>
       <div className="shrink self-start">
         {paragraphs.map((text, i) => (
