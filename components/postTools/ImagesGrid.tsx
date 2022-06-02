@@ -30,13 +30,14 @@ const ImagesGrid = ({
     <div className="py-3 flex flex-col justify-center">
       <div className={`grid ${getCols(images)} gap-3`}>
         {images.map((image, i) => (
-          <Image
-            key={i}
-            src={image.src}
-            width={image.width}
-            height={image.height}
-            alt=""
-          />
+          <div key={i} className="my-auto">
+            <Image
+              src={image.src}
+              width={image.width}
+              height={image.height}
+              alt=""
+            />
+          </div>
         ))}
       </div>
       <span className="text-sm mx-10 mt-3 italic">{caption}</span>
