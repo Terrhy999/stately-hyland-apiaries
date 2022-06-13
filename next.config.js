@@ -20,4 +20,5 @@ module.exports = withMDX({
   images: {
     domains: ["files.stripe.com", "via.placeholder.com"],
   },
+  optimizeFonts: false,
 });

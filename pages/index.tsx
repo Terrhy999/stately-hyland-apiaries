@@ -19,6 +19,10 @@ export async function getStaticProps() {
 }
 
 const Home = ({ metaData }: { metaData: IMeta[] }) => {
+  const sortedMetaData = metaData.sort((a, b) => {
+    return new Date(a.date).valueOf() - new Date(b.date).valueOf();
+  });
+
   return (
     <>
       <Head>
@@ -27,7 +31,7 @@ const Home = ({ metaData }: { metaData: IMeta[] }) => {
       <div className="w-full">
         <h2 className="text-3xl font-lato font-bold pb-5">Blog Posts</h2>
         <div className="w-full h-min grid grid-cols sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {metaData.map((post, i) => (
+          {sortedMetaData.map((post, i) => (
             <PostCard
               key={i}
               title={post.title}

@@ -3,6 +3,16 @@ import Link from "next/link";
 import type { IMeta } from "../types";
 
 const PostCard = ({ title, date, caption, thumbnail, slug }: IMeta) => {
+  const getFormattedDate = (d: string) => {
+    const dateObject = new Date(d);
+    const options: Intl.DateTimeFormatOptions = {
+      month: "long",
+      year: "numeric",
+      day: "numeric",
+    };
+    return dateObject.toLocaleDateString("en-us", options);
+  };
+
   return (
     <Link href={`/posts/${slug}`} passHref={true}>
       <div className="rounded cursor-pointer overflow-hidden flex flex-col font-lato drop-shadow-md">
@@ -17,7 +27,7 @@ const PostCard = ({ title, date, caption, thumbnail, slug }: IMeta) => {
         </div>
         <div className="w-full p-3 bg-white flex-grow rounded">
           <h2 className="font-semibold text-lg w-full pb-2">{title}</h2>
-          <p className="text-sm pb-2">{date}</p>
+          <p className="text-sm pb-2">{getFormattedDate(date)}</p>
           <p>{caption}</p>
         </div>
       </div>
