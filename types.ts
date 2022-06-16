@@ -26,9 +26,9 @@ export interface IProduct {
   unitAmount: number;
   description: string;
   metadata: {
-    weight: number;
-    color: string;
-    type: string;
+    productType: string;
+    weightOz: number;
+    honeyType: string | null;
   };
 }
 

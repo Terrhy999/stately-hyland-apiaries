@@ -51,6 +51,20 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
     throw new Error("No unit price for this product");
   }
 
+  if (product.metadata["productType"] == null) {
+    throw new Error(
+      `Product ${product.name} is missing "productType" metadata`
+    );
+  }
+
+  if (product.metadata["productType"] === "honey") {
+    if (product.metadata["honeyType"] == null) {
+      throw new Error(
+        `Product ${product.name} is a honey product but is missing "honeyType" metadata`
+      );
+    }
+  }
+
   const productWithPrice: IProduct = {
     name: product.name,
     productId: product.id,
@@ -59,9 +73,9 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
     unitAmount: price,
     description: product.description ?? "",
     metadata: {
-      weight: Number(product.metadata["weight"] || 0),
-      type: product.metadata["type"] || "",
-      color: product.metadata["color"] || "",
+      weightOz: Number(product.metadata["weightOz"]),
+      productType: product.metadata["productType"],
+      honeyType: product.metadata["honeyType"] || null,
     },
   };
   return {
@@ -75,7 +89,7 @@ const ProductPage = ({ product }: { product: IProduct }) => {
 
   return (
     <div className="flex flex-col p-3 lg:p-5 w-full lg:flex-row lg:max-h-[600px]">
-      <div className="aspect-[5/4] mb-4 lg:mb-0 relative rounded overflow-hidden flex-shrink-0 lg:aspect-[3/4] lg:min-w-[40%]">
+      <div className="aspect-square mb-4 lg:mb-0 relative rounded overflow-hidden flex-shrink-0 lg:aspect-[4/5] lg:min-w-[40%]">
         <Image
           src={product.images[0] ?? ""}
           alt="Product Image"
