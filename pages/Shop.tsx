@@ -1,9 +1,9 @@
 import Head from "next/head";
-import { useState } from "react";
+// import { useState } from "react";
 import Stripe from "stripe";
 import ProductCard from "../components/ProductCard";
 import { IProduct } from "../types";
-import { FaAngleDown } from "react-icons/fa";
+// import { FaAngleDown } from "react-icons/fa";
 
 export async function getStaticProps() {
   if (process.env["STRIPE_SECRET_KEY"] == undefined) {
