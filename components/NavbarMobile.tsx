@@ -66,7 +66,7 @@ const NavbarMobile = () => {
             Resources
           </a>
         </Link>
-        <Link href="/about">
+        {/* <Link href="/about">
           <a
             className={`p-2 mx-2 text-white rounded text-lg ${
               router.pathname === "/About" ? "text-[#1abc9c]" : ""
@@ -74,7 +74,7 @@ const NavbarMobile = () => {
           >
             About
           </a>
-        </Link>
+        </Link> */}
       </div>
       <div
         className={`bg-black absolute top-0 z-10 w-full h-screen transition-all duration-500 ease-in-out ${

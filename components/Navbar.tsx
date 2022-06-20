@@ -63,7 +63,7 @@ const Navbar = () => {
               Beekeeping Resources
             </a>
           </Link>
-          <Link href="/about">
+          {/* <Link href="/about">
             <a
               className={`p-2 mx-1 hover:text-white rounded text-lg ${
                 router.pathname === "/About" ? "text-[#1abc9c]" : ""
@@ -71,7 +71,7 @@ const Navbar = () => {
             >
               About
             </a>
-          </Link>
+          </Link> */}
           <Link href="/shop">
             <a
               className={`p-2 mx-1 hover:text-white rounded text-lg ${
