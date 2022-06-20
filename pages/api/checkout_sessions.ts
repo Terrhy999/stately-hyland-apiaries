@@ -29,7 +29,7 @@ export default async function handler(
           },
           shipping_rates: ["shr_1JPwtaKnxKfZHThpPxgjhI86"],
           success_url: `${req.headers.origin}`,
-          cancel_url: `${req.headers.origin}/Cart`,
+          cancel_url: `${req.headers.origin}/cart`,
         });
       res.status(200).json(session);
     } catch (err) {

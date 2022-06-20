@@ -27,7 +27,7 @@ const NavbarMobile = () => {
             SHA
           </div>
         </Link>
-        <Link href={"/Cart"} passHref={true}>
+        <Link href={"/cart"} passHref={true}>
           <div className="text-xl cursor-pointer order-last self-center">
             Cart ({getCartCount()})
           </div>
@@ -48,10 +48,10 @@ const NavbarMobile = () => {
             Blog
           </a>
         </Link>
-        <Link href="/Shop">
+        <Link href="/shop">
           <a
             className={`p-2 mx-2 text-white rounded text-lg ${
-              router.pathname === "/Shop" ? "text-[#1abc9c]" : ""
+              router.pathname === "/shop" ? "text-[#1abc9c]" : ""
             }`}
           >
             Shop

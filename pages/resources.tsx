@@ -31,7 +31,7 @@ const Resources = () => {
           <span className="font-bold">Cicada Killer Wasp NJ SITE:EDU</span>
         </p>
         <p className={"mb-0 font-bold uppercase"}>
-          Beekeping Associations, Clubs
+          Beekeeping Associations, Clubs
         </p>
         <ul>
           <li>
