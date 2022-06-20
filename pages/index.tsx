@@ -20,7 +20,7 @@ export async function getStaticProps() {
 
 const Home = ({ metaData }: { metaData: IMeta[] }) => {
   const sortedMetaData = metaData.sort((a, b) => {
-    return new Date(a.date).valueOf() - new Date(b.date).valueOf();
+    return new Date(b.date).valueOf() - new Date(a.date).valueOf();
   });
 
   return (

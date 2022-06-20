@@ -19,8 +19,7 @@ const Navbar = () => {
     <nav className="bg-[#1d1d1d] flex-col items-center w-full lg:mb-10 hidden md:flex">
       {router.pathname === "/" && (
         <div
-          className={`flex flex-row justify-center bg-no-repeat bg-cover bg-bottom w-full
-          bg-[url('https://statelyhylandmanor.com/wp-content/uploads/2020/08/cropped-20200605_200148-PANO-scaled-1.jpg')] items-center p-1 px-4 z-20 h-96`}
+          className={`flex flex-row justify-center bg-no-repeat bg-cover bg-bottom w-full items-center p-1 px-4 z-20 h-96`}
         >
           <div className="bg-[#1d1d1d] divide-y-2 divide-[rgba(255, 255, 255, 0.1)] p-4">
             <h6 className="font-bold font-Raleway tracking-wider text-4xl text-center m-4 text-white">
