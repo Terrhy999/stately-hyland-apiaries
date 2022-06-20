@@ -54,7 +54,7 @@ const Navbar = () => {
               Blog
             </a>
           </Link>
-          <Link href="/Resources">
+          <Link href="/resources">
             <a
               className={`p-2 mx-1 hover:text-white rounded text-lg ${
                 router.pathname === "/Resources" ? "text-[#1abc9c]" : ""
@@ -63,7 +63,7 @@ const Navbar = () => {
               Beekeeping Resources
             </a>
           </Link>
-          <Link href="/About">
+          <Link href="/about">
             <a
               className={`p-2 mx-1 hover:text-white rounded text-lg ${
                 router.pathname === "/About" ? "text-[#1abc9c]" : ""
