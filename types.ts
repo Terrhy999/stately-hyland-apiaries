@@ -26,9 +26,9 @@ export interface IProduct {
   unitAmount: number;
   description: string;
   metadata: {
-    productType: string;
+    productType: "honey" | "candle";
     weightOz: number;
-    honeyType: string | null;
+    honeyType: "light" | "dark" | "creamed" | null;
   };
 }
 
