@@ -54,18 +54,41 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
     throw new Error("No unit price for this product");
   }
 
-  if (product.metadata["productType"] == null) {
+  if (
+    product.metadata["productType"] == null ||
+    (product.metadata["productType"] !== "honey" &&
+      product.metadata["productType"] !== "candle")
+  ) {
+    console.log(product);
     throw new Error(
-      `Product ${product.name} is missing "productType" metadata`
+      `Product ${product.name} has a missing or mistyped "productType" metadata, should only be 'honey' or 'candle'`
     );
   }
 
   if (product.metadata["productType"] === "honey") {
-    if (product.metadata["honeyType"] == null) {
+    if (
+      product.metadata["honeyType"] == null ||
+      (product.metadata["honeyType"] !== "light" &&
+        product.metadata["honeyType"] !== "dark" &&
+        product.metadata["honeyType"] !== "creamed")
+    ) {
+      console.log(product);
       throw new Error(
-        `Product ${product.name} is a honey product but is missing "honeyType" metadata`
+        `Product ${product.name} is a honey product but has a missing or mistyped "honeyType" metadata, should only be 'light', 'dark', or 'creamed'`
       );
     }
+  }
+
+  if (
+    product.metadata["honeyType"] != null &&
+    product.metadata["honeyType"] !== "light" &&
+    product.metadata["honeyType"] !== "dark" &&
+    product.metadata["honeyType"] !== "creamed"
+  ) {
+    console.log(product);
+    throw new Error(
+      `Product ${product.name} is not a honey product but has a mistyped "honeyType" metadata, should only be 'light', 'dark', 'creamed', or null`
+    );
   }
 
   const productWithPrice: IProduct = {
