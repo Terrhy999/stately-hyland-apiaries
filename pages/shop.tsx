@@ -1,95 +1,10 @@
 import Head from "next/head";
-// import { useState } from "react";
-import Stripe from "stripe";
+import { getAllProductsWithPrices } from "../lib/stripeUtils";
 import ProductCard from "../components/ProductCard";
 import { IProduct } from "../types";
-// import { FaAngleDown } from "react-icons/fa";
 
 export async function getStaticProps() {
-  if (process.env["STRIPE_SECRET_KEY"] == undefined) {
-    throw new Error("Missing Stripe secret key");
-  }
-  const stripe = new Stripe(process.env["STRIPE_SECRET_KEY"], {
-    apiVersion: "2020-08-27",
-  });
-
-  const productsObject = await stripe.products.list({
-    active: true,
-    limit: 100,
-  });
-  const products = productsObject.data;
-
-  const pricesObject = await stripe.prices.list({ limit: 100 });
-  const prices = pricesObject.data;
-
-  const productsWithPrices: IProduct[] = products.map((product) => {
-    const priceObjectForProduct = prices.find(
-      (price) => price.product === product.id
-    );
-    if (priceObjectForProduct == null) {
-      throw new Error(`Product ${product.name} has no associated price object`);
-    }
-
-    const priceForProduct = priceObjectForProduct["unit_amount"];
-    if (priceForProduct == null) {
-      throw new Error(
-        `Price ${priceObjectForProduct.id} is missing "unit_amount" property`
-      );
-    }
-
-    if (
-      product.metadata["productType"] == null ||
-      (product.metadata["productType"] !== "honey" &&
-        product.metadata["productType"] !== "candle")
-    ) {
-      console.log(product);
-      throw new Error(
-        `Product ${product.name} has a missing or mistyped "productType" metadata, should only be 'honey' or 'candle'`
-      );
-    }
-
-    if (product.metadata["productType"] === "honey") {
-      if (
-        product.metadata["honeyType"] == null ||
-        (product.metadata["honeyType"] !== "light" &&
-          product.metadata["honeyType"] !== "dark" &&
-          product.metadata["honeyType"] !== "creamed")
-      ) {
-        console.log(product);
-        throw new Error(
-          `Product ${product.name} is a honey product but has a missing or mistyped "honeyType" metadata, should only be 'light', 'dark', or 'creamed'`
-        );
-      }
-    }
-
-    if (
-      product.metadata["honeyType"] != null &&
-      product.metadata["honeyType"] !== "light" &&
-      product.metadata["honeyType"] !== "dark" &&
-      product.metadata["honeyType"] !== "creamed"
-    ) {
-      console.log(product);
-      throw new Error(
-        `Product ${product.name} is not a honey product but has a mistyped "honeyType" metadata, should only be 'light', 'dark', 'creamed', or null`
-      );
-    }
-
-    const finalProduct: IProduct = {
-      name: product.name,
-      productId: product.id,
-      priceId: priceObjectForProduct["id"],
-      unitAmount: priceForProduct,
-      images: product.images,
-      description: product.description ?? "",
-      metadata: {
-        productType: product.metadata["productType"],
-        weightOz: Number(product.metadata["weightOz"]),
-        honeyType: product.metadata["honeyType"] || null,
-      },
-    };
-
-    return finalProduct;
-  });
+  const productsWithPrices = await getAllProductsWithPrices();
   return {
     props: { products: productsWithPrices },
   };

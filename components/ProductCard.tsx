@@ -3,7 +3,7 @@ import type { IProduct } from "../types";
 import Image from "next/image";
 import { CartContext } from "../context/CartContext";
 import { useContext } from "react";
-import { getPriceLocaleString } from "../utils";
+import { getPriceLocaleString } from "../lib/utils";
 
 const ProductCard = ({ product }: { product: IProduct }) => {
   const { cartState, updateCart } = useContext(CartContext);
