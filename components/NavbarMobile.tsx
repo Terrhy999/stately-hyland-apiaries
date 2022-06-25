@@ -19,8 +19,8 @@ const NavbarMobile = () => {
   };
 
   return (
-    <nav className="md:hidden flex flex-col w-full bg-[#1d1d1d] font-lato z-30 sticky top-0">
-      <div className="flex w-full z-30 bg-[#1d1d1d] justify-between text-white p-1 px-5">
+    <nav className="md:hidden flex flex-col w-full bg-shaBlack font-lato z-30 sticky top-0">
+      <div className="flex w-full z-30 bg-shaBlack justify-between text-white p-1 px-5">
         <Hamburger toggled={isOpen} toggle={setOpen} color="white" />
         <Link href={"/"} passHref={true}>
           <div className="font-bold cursor-pointer uppercase text-2xl self-center">
@@ -34,7 +34,7 @@ const NavbarMobile = () => {
         </Link>
       </div>
       <div
-        className={`text-white bg-[#1d1d1d] w-full z-20 mt-14 -translate-y-full absolute flex flex-col p-3 transform-gpu transition-transform ease-in-out duration-500 ${
+        className={`text-white bg-shaBlack w-full z-20 mt-14 -translate-y-full absolute flex flex-col p-3 transform-gpu transition-transform ease-in-out duration-500 ${
           isOpen ? "transform-none" : ""
         }`}
         onClick={() => setOpen(false)}
@@ -42,7 +42,7 @@ const NavbarMobile = () => {
         <Link href="/">
           <a
             className={`p-2 mx-2 text-white rounded text-lg ${
-              router.pathname === "/" ? "text-[#1abc9c]" : ""
+              router.pathname === "/" ? "text-shaGreen" : ""
             }`}
           >
             Blog
@@ -51,7 +51,7 @@ const NavbarMobile = () => {
         <Link href="/shop">
           <a
             className={`p-2 mx-2 text-white rounded text-lg ${
-              router.pathname === "/shop" ? "text-[#1abc9c]" : ""
+              router.pathname === "/shop" ? "text-shaGreen" : ""
             }`}
           >
             Shop
@@ -60,7 +60,7 @@ const NavbarMobile = () => {
         <Link href="/resources">
           <a
             className={`p-2 mx-2 text-white rounded text-lg ${
-              router.pathname === "/Resources" ? "text-[#1abc9c]" : ""
+              router.pathname === "/Resources" ? "text-shaGreen" : ""
             }`}
           >
             Resources
@@ -69,7 +69,7 @@ const NavbarMobile = () => {
         {/* <Link href="/about">
           <a
             className={`p-2 mx-2 text-white rounded text-lg ${
-              router.pathname === "/About" ? "text-[#1abc9c]" : ""
+              router.pathname === "/About" ? "text-shaGreen" : ""
             }`}
           >
             About

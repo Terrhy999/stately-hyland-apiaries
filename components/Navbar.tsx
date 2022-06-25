@@ -16,12 +16,12 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-[#1d1d1d] flex-col items-center w-full lg:mb-10 hidden md:flex">
+    <nav className="bg-shaBlack flex-col items-center w-full lg:mb-10 hidden md:flex">
       {router.pathname === "/" && (
         <div
           className={`flex flex-row justify-center bg-no-repeat bg-cover bg-bottom w-full items-center p-1 px-4 z-20 h-96`}
         >
-          <div className="bg-[#1d1d1d] divide-y-2 divide-[rgba(255, 255, 255, 0.1)] p-4">
+          <div className="bg-shaBlack divide-y-2 divide-[rgba(255, 255, 255, 0.1)] p-4">
             <h6 className="font-bold font-Raleway tracking-wider text-4xl text-center m-4 text-white">
               STATELY HYLAND APIARIES
             </h6>
@@ -48,7 +48,7 @@ const Navbar = () => {
           <Link href="/">
             <a
               className={`p-2 mx-1 text-lg ${
-                router.pathname === "/" ? "text-[#1abc9c]" : ""
+                router.pathname === "/" ? "text-shaGreen" : ""
               }`}
             >
               Blog
@@ -57,7 +57,7 @@ const Navbar = () => {
           <Link href="/resources">
             <a
               className={`p-2 mx-1 hover:text-white rounded text-lg ${
-                router.pathname === "/Resources" ? "text-[#1abc9c]" : ""
+                router.pathname === "/Resources" ? "text-shaGreen" : ""
               }`}
             >
               Beekeeping Resources
@@ -66,7 +66,7 @@ const Navbar = () => {
           {/* <Link href="/about">
             <a
               className={`p-2 mx-1 hover:text-white rounded text-lg ${
-                router.pathname === "/About" ? "text-[#1abc9c]" : ""
+                router.pathname === "/About" ? "text-shaGreen" : ""
               }`}
             >
               About
@@ -75,7 +75,7 @@ const Navbar = () => {
           <Link href="/shop">
             <a
               className={`p-2 mx-1 hover:text-white rounded text-lg ${
-                router.pathname === "/shop" ? "text-[#1abc9c]" : ""
+                router.pathname === "/shop" ? "text-shaGreen" : ""
               }`}
             >
               Shop
@@ -84,7 +84,7 @@ const Navbar = () => {
           <Link href="/cart">
             <a
               className={`p-2 mx-1 hover:text-white rounded text-lg ${
-                router.pathname === "/cart" ? "text-[#1abc9c]" : ""
+                router.pathname === "/cart" ? "text-shaGreen" : ""
               }`}
             >
               Cart ({getCartCount()})

@@ -30,7 +30,7 @@ const ProductCard = ({ product }: { product: IProduct }) => {
           </Link>
           <div className="mb-4">{getPriceLocaleString(product)}</div>
           <button
-            className="bg-black text-white font-bold w-full p-2 hover:text-[#1abc9c]"
+            className="bg-black text-white font-bold w-full p-2 hover:text-shaGreen"
             onClick={() =>
               updateCart(cartState, {
                 type: "addToCart",

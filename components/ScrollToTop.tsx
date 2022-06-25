@@ -30,7 +30,7 @@ const ScrollToTop = () => {
   return (
     <div className="fixed bottom-10 right-10 hidden lg:block z-10">
       <FaAngleUp
-        className={`w-10 h-10 bg-[#1d1d1d] rounded cursor-pointer text-white hover:text-[#1abc9c] ${
+        className={`w-10 h-10 bg-shaBlack rounded cursor-pointer text-white hover:text-shaGreen ${
           isVisible ? "opacity-100" : "opacity-0"
         }`}
         onClick={scrollTop}

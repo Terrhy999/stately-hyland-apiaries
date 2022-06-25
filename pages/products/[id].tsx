@@ -59,7 +59,7 @@ const ProductPage = ({ product }: { product: IProduct }) => {
             <span className="pl-2 pr-4">Quantity</span>
             <div className="flex flex-row justify-center items-center">
               <FaAngleLeft
-                className="mx-2 h-6 w-6 cursor-pointer hover:text-[#1abc9c]"
+                className="mx-2 h-6 w-6 cursor-pointer hover:text-shaGreen"
                 onClick={() => setQuantity(quantity - 1)}
               />
               <input
@@ -69,13 +69,13 @@ const ProductPage = ({ product }: { product: IProduct }) => {
                 onChange={(e) => setQuantity(Number(e.target.value))}
               />
               <FaAngleRight
-                className="mx-2 h-6 w-6 cursor-pointer hover:text-[#1abc9c]"
+                className="mx-2 h-6 w-6 cursor-pointer hover:text-shaGreen"
                 onClick={() => setQuantity(quantity + 1)}
               />
             </div>
           </div>
           <button
-            className="bg-black text-white font-bold p-3 flex-grow hover:text-[#1abc9c]"
+            className="bg-black text-white font-bold p-3 flex-grow hover:text-shaGreen"
             onClick={() =>
               updateCart(cartState, {
                 type: "addToCart",

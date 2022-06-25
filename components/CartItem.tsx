@@ -42,7 +42,7 @@ const CartItem = ({ cartItem }: { cartItem: ICartItem }) => {
           <div className="flex flex-row justify-center items-center">
             <span className="hidden sm:block">Quantity</span>
             <FaAngleLeft
-              className={`mx-2 h-6 w-6 cursor-pointer hover:text-[#1abc9c] ${
+              className={`mx-2 h-6 w-6 cursor-pointer hover:text-shaGreen ${
                 cartItem.quantity == 1
                   ? "text-gray-300 pointer-events-none"
                   : ""
@@ -73,7 +73,7 @@ const CartItem = ({ cartItem }: { cartItem: ICartItem }) => {
               }}
             />
             <FaAngleRight
-              className="mx-2 h-6 w-6 cursor-pointer hover:text-[#1abc9c]"
+              className="mx-2 h-6 w-6 cursor-pointer hover:text-shaGreen"
               onClick={() =>
                 updateCart(cartState, {
                   type: "increaseQuantity",

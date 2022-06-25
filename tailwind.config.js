@@ -21,6 +21,10 @@ module.exports = {
           },
         },
       },
+      colors: {
+        shaGreen: "#1abc9c",
+        shaBlack: "#1d1d1d",
+      },
     },
   },
   plugins: [require("@tailwindcss/typography")],
