@@ -1,28 +1,20 @@
-import fs from "fs";
-import { join } from "path";
-import type { IMeta } from "../types";
-import PostCard from "../components/PostCard";
 import Head from "next/head";
+import sanityClient from "../lib/sanity";
+import imageUrlBuilder from "@sanity/image-url";
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import PostCard from "../components/PostCard";
 
-export async function getStaticProps() {
-  const postsDirectory = join(process.cwd(), "pages/posts");
-  const files = fs.readdirSync(postsDirectory);
+const builder = imageUrlBuilder(sanityClient);
+const getUrlFor = (source: SanityImageSource) => builder.image(source);
 
-  const metaData: IMeta[] = await Promise.all(
-    files.map(async (file) => {
-      const { meta }: { meta: IMeta } = await import(`../pages/posts/${file}`);
-      return meta;
-    })
+export const getStaticProps = async () => {
+  const posts = await sanityClient.fetch(
+    `*[_type == 'post']{title, _createdAt, caption, mainImage, slug}`
   );
+  return { props: { posts } };
+};
 
-  return { props: { metaData } };
-}
-
-const Home = ({ metaData }: { metaData: IMeta[] }) => {
-  const sortedMetaData = metaData.sort((a, b) => {
-    return new Date(b.date).valueOf() - new Date(a.date).valueOf();
-  });
-
+const Home = ({ posts }) => {
   return (
     <>
       <Head>
@@ -31,14 +23,14 @@ const Home = ({ metaData }: { metaData: IMeta[] }) => {
       <div className="w-full">
         <h2 className="text-3xl font-lato font-bold pb-5">Blog Posts</h2>
         <div className="w-full h-min grid grid-cols sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {sortedMetaData.map((post, i) => (
+          {posts.map((post, i) => (
             <PostCard
-              key={i}
               title={post.title}
-              date={post.date}
+              thumbnail={getUrlFor(post.mainImage).url()}
               caption={post.caption}
-              thumbnail={post.thumbnail}
               slug={post.slug}
+              date={post._createdAt}
+              key={i}
             />
           ))}
         </div>

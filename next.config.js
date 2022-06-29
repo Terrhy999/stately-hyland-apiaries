@@ -18,7 +18,7 @@ const withMDX = require("@next/mdx")({
 module.exports = withMDX({
   pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
   images: {
-    domains: ["files.stripe.com", "via.placeholder.com"],
+    domains: ["files.stripe.com", "via.placeholder.com", "cdn.sanity.io"],
   },
   optimizeFonts: false,
 });
