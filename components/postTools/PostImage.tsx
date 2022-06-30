@@ -5,7 +5,7 @@ const PostImage = ({
   src,
   height,
   width,
-  alt,
+  alt = "",
   justify,
   caption,
 }: IPostImage) => {

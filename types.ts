@@ -36,7 +36,7 @@ export interface IPostImage {
   src: string;
   height: number;
   width: number;
-  alt: string;
+  alt?: string;
   justify: "start" | "end" | "center";
   caption?: string;
 }

@@ -1,8 +1,9 @@
 import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import { Params } from "next/dist/server/router";
 import sanityClient from "../../lib/sanity";
-import { PortableText } from "@portabletext/react";
+import { PortableText, PortableTextComponents } from "@portabletext/react";
 import PostImage from "../../components/postTools/PostImage";
+import LinkNewTab from "../../components/postTools/LinkNewTab";
 
 interface IPostSlug {
   slug: {
@@ -14,7 +15,10 @@ interface IPostSlug {
 export const getStaticProps = async (context: GetStaticPropsContext) => {
   const { slug } = context.params as Params;
   const post = await sanityClient.fetch(
-    `*[_type == 'post' && slug.current == '${slug}']{title, caption, _createdAt, mainImage->, }[0]`
+    `*[_type == 'post' && slug.current == '${slug}']{title, caption, _createdAt, body[]{
+      ...,
+      asset->
+    }}[0]`
   );
 
   return {
@@ -39,9 +43,33 @@ export const getStaticPaths = async () => {
   };
 };
 
-const portableTextComponents = {
+const portableTextComponents: PortableTextComponents = {
   types: {
-    image: ({ value }) => <PostImage src="" height={} width={} alt={} justify={} caption={}/>,
+    image: ({ value }) => (
+      <PostImage
+        src={value.asset.url}
+        height={value.asset.metadata.dimensions.height}
+        width={value.asset.metadata.dimensions.width}
+        caption={value.caption}
+        justify="center"
+      />
+    ),
+  },
+  marks: {
+    link: ({ children, value }) => {
+      const rel = !value.href.startsWith("/")
+        ? "noreferer noopener"
+        : undefined;
+      return (
+        <a
+          href={value.href}
+          rel={rel}
+          className="text-shaGreen visited:text-purple-900"
+        >
+          {children}
+        </a>
+      );
+    },
   },
 };
 
