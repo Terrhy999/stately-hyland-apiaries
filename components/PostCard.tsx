@@ -14,7 +14,7 @@ const PostCard = ({ title, date, caption, thumbnail, slug }: IMeta) => {
   };
 
   return (
-    <Link href={`/posts/${slug}`} passHref={true}>
+    <Link href={`/post/${slug}`} passHref={true}>
       <div className="rounded cursor-pointer overflow-hidden flex flex-col font-lato drop-shadow-md">
         <div className="aspect-[3/2] flex-shrink-0 relative overflow-hidden">
           <Image
