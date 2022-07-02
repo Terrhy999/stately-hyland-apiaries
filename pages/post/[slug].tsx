@@ -77,12 +77,12 @@ const Post = ({ post }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <div className="prose prose-lg">
       <div className="mb-3">
-        <h2 className="mb-1">{post.title}</h2>
+        <h2 className="mb-1">{post?.title}</h2>
         <p className="text-gray-500 mb-0">
-          {getFormattedDate(post._createdAt)}
+          {getFormattedDate(post?._createdAt)}
         </p>
       </div>
-      <PortableText value={post.body} components={portableTextComponents} />
+      <PortableText value={post?.body} components={portableTextComponents} />
     </div>
   );
 };
