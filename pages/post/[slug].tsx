@@ -3,7 +3,7 @@ import { Params } from "next/dist/server/router";
 import sanityClient from "../../lib/sanity";
 import { PortableText, PortableTextComponents } from "@portabletext/react";
 import PostImage from "../../components/postTools/PostImage";
-import LinkNewTab from "../../components/postTools/LinkNewTab";
+import { getFormattedDate } from "../../lib/utils";
 
 interface IPostSlug {
   slug: {
@@ -75,7 +75,13 @@ const portableTextComponents: PortableTextComponents = {
 
 const Post = ({ post }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
-    <div className="prose">
+    <div className="prose prose-lg">
+      <div className="mb-3">
+        <h2 className="mb-1">{post.title}</h2>
+        <p className="text-gray-500 mb-0">
+          {getFormattedDate(post._createdAt)}
+        </p>
+      </div>
       <PortableText value={post.body} components={portableTextComponents} />
     </div>
   );

@@ -1,18 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { IMeta } from "../types";
+import { getFormattedDate } from "../lib/utils";
 
 const PostCard = ({ title, date, caption, thumbnail, slug }: IMeta) => {
-  const getFormattedDate = (d: string) => {
-    const dateObject = new Date(d);
-    const options: Intl.DateTimeFormatOptions = {
-      month: "long",
-      year: "numeric",
-      day: "numeric",
-    };
-    return dateObject.toLocaleDateString("en-us", options);
-  };
-
   return (
     <Link href={`/post/${slug}`} passHref={true}>
       <div className="rounded cursor-pointer overflow-hidden flex flex-col font-lato drop-shadow-md">
