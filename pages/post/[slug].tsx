@@ -43,7 +43,7 @@ export const getStaticPaths = async () => {
   };
 };
 
-const portableTextComponents: PortableTextComponents = {
+const portableTextComponents: Partial<PortableTextComponents> = {
   types: {
     image: ({ value }) => (
       <PostImage
