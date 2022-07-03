@@ -7,20 +7,6 @@ import Document, {
 } from "next/document";
 
 class MyDocument extends Document {
-  static override async getInitialProps(ctx: DocumentContext) {
-    const originalRendererPage = ctx.renderPage;
-
-    ctx.renderPage = () =>
-      originalRendererPage({
-        enhanceApp: (App) => App,
-        enhanceComponent: (Component) => Component,
-      });
-
-    const initialProps = await Document.getInitialProps(ctx);
-
-    return initialProps;
-  }
-
   override render() {
     return (
       <Html>
