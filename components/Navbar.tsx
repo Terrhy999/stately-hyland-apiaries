@@ -23,7 +23,7 @@ const Navbar = () => {
         >
           <div className="bg-shaBlack divide-y-2 divide-[rgba(255, 255, 255, 0.1)] p-4">
             <h6 className="font-bold font-Raleway tracking-wider text-4xl text-center m-4 text-white">
-              STATELY HYLAND APIARIES
+              STATELY HYLAND MANOR
             </h6>
             <h2 className="text-white font-Raleway text-xl text-center p-4">
               Seasoned, Organizational Wisdom ~ from a mom of three boys.
@@ -41,7 +41,7 @@ const Navbar = () => {
           <p
             className={`p-2 mx-1 text-xl font-bold cursor-pointer hidden sm:block`}
           >
-            Stately Hyland Apiaries
+            Stately Hyland Manor
           </p>
         </Link>
         <div className="flex flex-row">
