@@ -1,47 +1,12 @@
 import Head from "next/head";
 import sanityClient from "../lib/sanity";
-import imageUrlBuilder from "@sanity/image-url";
-import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import PostCard from "../components/PostCard";
 import { InferGetStaticPropsType } from "next";
-
-const builder = imageUrlBuilder(sanityClient);
-const getUrlFor = (source: SanityImageSource) => builder.image(source);
-
-interface IPostCard {
-  _createdAt: string;
-  caption: string;
-  slug: {
-    _type: "slug";
-    current: string;
-  };
-  title: string;
-  mainImage: {
-    _type: "image";
-    asset: {
-      _ref: string;
-      _type: "reference";
-    };
-    crop?: {
-      _type: string;
-      bottom: number;
-      left: number;
-      right: number;
-      top: number;
-    };
-    hotspot?: {
-      _type: string;
-      height: number;
-      width: number;
-      x: number;
-      y: number;
-    };
-  };
-}
+import type { ISanityPost } from "../types";
 
 export const getStaticProps = async () => {
-  const posts: IPostCard[] = await sanityClient.fetch(
-    `*[_type == 'post']{title, _createdAt, caption, mainImage, slug}`
+  const posts: ISanityPost[] = await sanityClient.fetch(
+    `*[_type == 'post']{title, _createdAt, caption, mainImage{..., asset->}, slug}`
   );
   return { props: { posts } };
 };
@@ -58,7 +23,7 @@ const Home = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
           {posts.map((post, i) => (
             <PostCard
               title={post.title}
-              thumbnail={getUrlFor(post.mainImage).url()}
+              imageAsset={post.mainImage.asset}
               caption={post.caption}
               slug={post.slug.current}
               date={post._createdAt}

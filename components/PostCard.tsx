@@ -1,19 +1,21 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { IMeta } from "../types";
+import type { IPostCard } from "../types";
 import { getFormattedDate } from "../lib/utils";
 
-const PostCard = ({ title, date, caption, thumbnail, slug }: IMeta) => {
+const PostCard = ({ title, date, caption, imageAsset, slug }: IPostCard) => {
   return (
     <Link href={`/post/${slug}`} passHref={true}>
       <div className="rounded cursor-pointer overflow-hidden flex flex-col font-lato drop-shadow-md">
         <div className="aspect-[3/2] flex-shrink-0 relative overflow-hidden">
           <Image
-            src={thumbnail || "https://via.placeholder.com/300"}
+            src={imageAsset.url || "https://via.placeholder.com/300"}
             alt="Post Thumbnail"
             layout="fill"
             objectFit="cover"
             objectPosition="bottom"
+            width={imageAsset.metadata.dimensions.width}
+            height={imageAsset.metadata.dimensions.height}
           />
         </div>
         <div className="w-full p-3 bg-white flex-grow rounded">
