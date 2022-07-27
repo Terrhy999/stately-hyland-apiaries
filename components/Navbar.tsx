@@ -1,10 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 import { ICartItem } from "../types";
-import bgImage from "../public/images/SHA-Banner.jpg";
 
 const Navbar = () => {
   const router = useRouter();
@@ -20,15 +18,8 @@ const Navbar = () => {
   return (
     <nav className="bg-shaBlack flex-col items-center w-full lg:mb-10 hidden md:flex">
       {router.pathname === "/" && (
-        <div className="relative w-full h-96">
-          <Image
-            src={bgImage}
-            alt="bg image"
-            layout="fill"
-            objectFit="cover"
-            className="-z-10"
-          />
-          <div className="bg-shaBlack divide-y-2 divide-[rgba(255, 255, 255, 0.1)]">
+        <div className="flex flex-row justify-center bg-[url(/images/SHA-Banner.jpg)] bg-no-repeat bg-cover bg-bottom w-full items-center p-1 px-4 z-20 h-96">
+          <div className="bg-shaBlack divide-y-2 divide-[rgba(255, 255, 255, 0.1)] p-4">
             <h6 className="font-bold font-Raleway tracking-wider text-4xl text-center m-4 text-white">
               STATELY HYLAND MANOR
             </h6>
