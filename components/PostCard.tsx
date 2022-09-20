@@ -14,8 +14,11 @@ const PostCard = ({ title, date, caption, imageAsset, slug }: IPostCard) => {
             layout="fill"
             objectFit="cover"
             objectPosition="bottom"
-            width={imageAsset.metadata.dimensions.width}
-            height={imageAsset.metadata.dimensions.height}
+            sizes="(max-width: 638px) 100vw,
+                    (max-width: 1024px) 50vw,
+                      33vw"
+            // width={imageAsset.metadata.dimensions.width}
+            // height={imageAsset.metadata.dimensions.height}
           />
         </div>
         <div className="w-full p-3 bg-white flex-grow rounded">
