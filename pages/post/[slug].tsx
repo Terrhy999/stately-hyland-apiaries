@@ -70,6 +70,7 @@ const portableTextComponents: Partial<PortableTextComponents> = {
         justify="center"
       />
     ),
+    // p: ({ children }) => <p className="font-lato">{children}</p>,
   },
   marks: {
     link: ({ children, value }) => {
@@ -87,11 +88,18 @@ const portableTextComponents: Partial<PortableTextComponents> = {
       );
     },
   },
+  block: {
+    blockquote: ({ children }) => (
+      <blockquote className="border-gray-500 bg-gray-300">
+        {children}
+      </blockquote>
+    ),
+  },
 };
 
 const Post = ({ post }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
-    <div className="prose prose-lg">
+    <div className="prose prose-lg text-[19px] font-lato">
       <div className="mb-3">
         <h2 className="mb-1">{post.title}</h2>
         <p className="text-gray-500 mb-0">
