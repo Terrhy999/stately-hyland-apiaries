@@ -19,6 +19,7 @@ const Navbar = () => {
     <nav className="bg-shaBlack flex-col items-center w-full lg:mb-10 hidden md:flex">
       {router.pathname === "/" && (
         <div className="flex flex-row justify-center bg-[url(/images/SHA-Banner.jpg)] bg-no-repeat bg-cover bg-bottom w-full items-center p-1 px-4 z-20 h-96">
+
           <div className="bg-shaBlack divide-y-2 divide-[rgba(255, 255, 255, 0.1)] p-4">
             <h6 className="font-bold font-Raleway tracking-wider text-4xl text-center m-4 text-white">
               STATELY HYLAND MANOR

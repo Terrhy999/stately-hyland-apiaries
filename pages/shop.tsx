@@ -62,6 +62,17 @@ const Shop = ({ products }: { products: IProduct[] }) => {
   //   return filteredProducts;
   // };
 
+  const sortedProducts = products.sort((a, b) => {
+    if (a.metadata.productType === b.metadata.productType) {
+      return a.name.localeCompare(b.name);
+    } else {
+      if (a.metadata.productType === "honey") {
+        return -1;
+      }
+      return 1;
+    }
+  });
+
   return (
     <>
       <Head>
@@ -71,7 +82,7 @@ const Shop = ({ products }: { products: IProduct[] }) => {
         <h2 className="font-lato text-3xl font-bold pb-5">Shop</h2>
         <div className="min-w-full flex flex-col justify-center">
           <div className="grid grid-cols sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-            {products.map((product) => (
+            {sortedProducts.map((product) => (
               <ProductCard product={product} key={product.productId} />
             ))}
           </div>

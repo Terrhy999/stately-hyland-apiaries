@@ -27,7 +27,15 @@ export default async function handler(
           shipping_address_collection: {
             allowed_countries: ["US"],
           },
-          shipping_rates: ["shr_1JPwtaKnxKfZHThpPxgjhI86"],
+          // shipping_rates: ["shr_1JPwtaKnxKfZHThpPxgjhI86"],
+          shipping_options: [
+            {
+              shipping_rate: "shr_1JPwtaKnxKfZHThpPxgjhI86",
+            },
+            {
+              shipping_rate: "shr_1LQ9bIKnxKfZHThpH2EcDqqV",
+            },
+          ],
           success_url: `${req.headers.origin}`,
           cancel_url: `${req.headers.origin}/cart`,
         });

@@ -24,7 +24,7 @@ const NavbarMobile = () => {
         <Hamburger toggled={isOpen} toggle={setOpen} color="white" />
         <Link href={"/"} passHref={true}>
           <div className="font-bold cursor-pointer uppercase text-2xl self-center">
-            SHA
+            SHM
           </div>
         </Link>
         <Link href={"/cart"} passHref={true}>
