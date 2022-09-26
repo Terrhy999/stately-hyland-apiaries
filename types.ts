@@ -28,7 +28,7 @@ export interface IProduct {
   metadata: {
     productType: "honey" | "candle";
     weightOz: number;
-    honeyType: "light" | "dark" | "creamed" | null;
+    honeyType: "light" | "dark" | "creamed" | "honeydew" | null;
   };
 }
 
