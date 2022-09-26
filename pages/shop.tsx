@@ -80,15 +80,6 @@ const Shop = ({ products }: { products: IProduct[] }) => {
       </Head>
       <div className="w-full">
         <h2 className="font-lato text-3xl font-bold pb-5">Shop</h2>
-        {/* <div className="bg-white shadow-lg p-2 mb-5 rounded-md flex flex-row justify-between items-center hover:bg-gray-50">
-          <span>Filter</span>
-          <FaAngleDown />
-        </div> */}
-        {/* <div className="shadow-lg bg-white">
-          <p className="hover:bg-gray-300">All</p>
-          <p className="hover:bg-gray-300">Honey</p>
-          <p className="hover:bg-gray-300">Candles</p>
-        </div> */}
         <div className="min-w-full flex flex-col justify-center">
           <div className="grid grid-cols sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
             {sortedProducts.map((product) => (

@@ -1,8 +1,8 @@
-export interface IMeta {
+export interface IPostCard {
   title: string;
   date: string;
   caption: string;
-  thumbnail: string;
+  imageAsset: IMainImageAsset;
   slug: string;
 }
 
@@ -36,7 +36,7 @@ export interface IPostImage {
   src: string;
   height: number;
   width: number;
-  alt: string;
+  alt?: string;
   justify: "start" | "end" | "center";
   caption?: string;
 }
@@ -63,4 +63,51 @@ export interface IAction {
     | "increaseQuantity"
     | "setQuantity";
   payload: ICartItem;
+}
+
+export interface IImageMetadata {
+  _type: string;
+  blurhash: string;
+  hasAlpha: boolean;
+  isOpaque: boolean;
+  lqip: string;
+  palette: Record<string, unknown>;
+  dimensions: {
+    _type: string;
+    aspectRatio: number;
+    height: number;
+    width: number;
+  };
+}
+
+export interface IMainImageAsset {
+  _createdAt: string;
+  _id: string;
+  _rev: string;
+  _type: "sanity.imageAsset";
+  _updatedAt: string;
+  assetId: string;
+  extension: string;
+  mimeType: string;
+  originalFilename: string;
+  path: string;
+  sha1hash: string;
+  size: number;
+  uploadId: string;
+  url: string;
+  metadata: IImageMetadata;
+}
+
+export interface ISanityPost {
+  _createdAt: string;
+  caption: string;
+  slug: {
+    _type: "slug";
+    current: string;
+  };
+  title: string;
+  mainImage: {
+    _type: "image";
+    asset: IMainImageAsset;
+  };
 }
