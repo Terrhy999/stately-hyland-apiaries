@@ -53,11 +53,12 @@ export const getAllProductsWithPrices = async () => {
         product.metadata["honeyType"] == null ||
         (product.metadata["honeyType"] !== "light" &&
           product.metadata["honeyType"] !== "dark" &&
-          product.metadata["honeyType"] !== "creamed")
+          product.metadata["honeyType"] !== "creamed" &&
+          product.metadata["honeyType"] !== "honeydew")
       ) {
         console.log(product);
         throw new Error(
-          `Product ${product.name} is a honey product but has a missing or mistyped "honeyType" metadata, should only be 'light', 'dark', or 'creamed'`
+          `Product ${product.name} is a honey product but has a missing or mistyped "honeyType" metadata, should only be 'light', 'dark', 'honeydew', or 'creamed'`
         );
       }
     }
@@ -66,7 +67,8 @@ export const getAllProductsWithPrices = async () => {
       product.metadata["honeyType"] != null &&
       product.metadata["honeyType"] !== "light" &&
       product.metadata["honeyType"] !== "dark" &&
-      product.metadata["honeyType"] !== "creamed"
+      product.metadata["honeyType"] !== "creamed" &&
+      product.metadata["honeyType"] !== "honeydew"
     ) {
       console.log(product);
       throw new Error(
@@ -127,7 +129,8 @@ export const getProductWithPrice = async (id: string) => {
       product.metadata["honeyType"] == null ||
       (product.metadata["honeyType"] !== "light" &&
         product.metadata["honeyType"] !== "dark" &&
-        product.metadata["honeyType"] !== "creamed")
+        product.metadata["honeyType"] !== "creamed" &&
+        product.metadata["honeyType"] !== "honeydew")
     ) {
       console.log(product);
       throw new Error(
@@ -140,7 +143,8 @@ export const getProductWithPrice = async (id: string) => {
     product.metadata["honeyType"] != null &&
     product.metadata["honeyType"] !== "light" &&
     product.metadata["honeyType"] !== "dark" &&
-    product.metadata["honeyType"] !== "creamed"
+    product.metadata["honeyType"] !== "creamed" &&
+    product.metadata["honeyType"] !== "honeydew"
   ) {
     console.log(product);
     throw new Error(
