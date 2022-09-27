@@ -12,6 +12,10 @@ export const getStaticProps = async () => {
 };
 
 const Home = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const sorted_posts = posts.sort(
+    (a, b) => Date.parse(b._createdAt) - Date.parse(a._createdAt)
+  );
+
   return (
     <>
       <Head>
@@ -20,7 +24,7 @@ const Home = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
       <div className="w-full">
         <h2 className="text-3xl font-lato font-bold pb-5">Blog Posts</h2>
         <div className="w-full h-min grid grid-cols sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {posts.map((post, i) => (
+          {sorted_posts.map((post, i) => (
             <PostCard
               title={post.title}
               imageAsset={post.mainImage.asset}
