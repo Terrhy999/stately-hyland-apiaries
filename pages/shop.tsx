@@ -62,16 +62,55 @@ const Shop = ({ products }: { products: IProduct[] }) => {
   //   return filteredProducts;
   // };
 
-  const sortedProducts = products.sort((a, b) => {
-    if (a.metadata.productType === b.metadata.productType) {
-      return a.name.localeCompare(b.name);
-    } else {
-      if (a.metadata.productType === "honey") {
-        return -1;
-      }
+  const sortProductType = (a: IProduct, b: IProduct) => {
+    if (
+      a.metadata.productType === "honey" &&
+      b.metadata.productType === "candle"
+    )
+      return -1;
+    if (
+      a.metadata.productType === "candle" &&
+      b.metadata.productType === "honey"
+    )
       return 1;
+    else return 0;
+  };
+
+  const honeyTypeSort = {
+    light: 1,
+    honeydew: 2,
+    dark: 3,
+    creamed: 4,
+  };
+
+  const sortHoneyType = (a: IProduct, b: IProduct) => {
+    if (
+      a.metadata.productType === "honey" &&
+      b.metadata.productType === "honey"
+    ) {
+      return (
+        honeyTypeSort[b.metadata.honeyType!] -
+        honeyTypeSort[a.metadata.honeyType!]
+      );
     }
-  });
+    return 0;
+  };
+
+  const sortHoneyWeight = (a: IProduct, b: IProduct) => {
+    if (
+      a.metadata.honeyType === b.metadata.honeyType ||
+      (a.metadata.productType === "candle" &&
+        b.metadata.productType === "candle")
+    ) {
+      return b.metadata.weightOz - a.metadata.weightOz;
+    }
+    return 0;
+  };
+
+  const sortedProducts = products
+    .sort(sortProductType)
+    .sort(sortHoneyType)
+    .sort(sortHoneyWeight);
 
   return (
     <>
