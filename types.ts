@@ -61,8 +61,9 @@ export interface IAction {
     | "removeFromCart"
     | "decreaseQuantity"
     | "increaseQuantity"
-    | "setQuantity";
-  payload: ICartItem;
+    | "setQuantity"
+    | "emptyCart";
+  payload: ICartItem | null;
 }
 
 export interface IImageMetadata {

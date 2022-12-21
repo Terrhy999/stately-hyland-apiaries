@@ -4,6 +4,11 @@ import { ICartItem } from "../types";
 const cartReducer = (state: ICartItem[], action: IAction): ICartItem[] => {
   switch (action.type) {
     case "addToCart": {
+      // if (action.payload == null) {
+      //   throw new Error(
+      //     "Action payload can only be empty when calling emptyCart"
+      //   );
+      // }
       const cartItemExists = state.find(
         (cartItem) =>
           cartItem.product.productId === action.payload.product.productId
@@ -12,7 +17,7 @@ const cartReducer = (state: ICartItem[], action: IAction): ICartItem[] => {
       if (cartItemExists) {
         newState = [...state].map((cartItem) => {
           if (cartItem.product.productId === cartItemExists.product.productId) {
-            cartItem.quantity = cartItem.quantity + action.payload.quantity;
+            cartItem.quantity = cartItem.quantity + action.payload?.quantity;
           }
           return cartItem;
         });
@@ -59,6 +64,11 @@ const cartReducer = (state: ICartItem[], action: IAction): ICartItem[] => {
         }
         return cartItem;
       });
+      return newState;
+      break;
+    }
+    case "emptyCart": {
+      const newState: ICartItem[] = [];
       return newState;
       break;
     }

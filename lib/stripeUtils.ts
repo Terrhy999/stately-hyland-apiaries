@@ -10,6 +10,15 @@ export const connectToStripe = () => {
   });
 };
 
+export const connectToTestStripe = () => {
+  if (process.env["STRIPE_SECRET_KEY_TEST"] == undefined) {
+    throw new Error("Missing Stripe secret key");
+  }
+  return new Stripe(process.env["STRIPE_SECRET_KEY_TEST"], {
+    apiVersion: "2020-08-27",
+  });
+};
+
 export const getAllProductsWithPrices = async () => {
   const stripe = connectToStripe();
 

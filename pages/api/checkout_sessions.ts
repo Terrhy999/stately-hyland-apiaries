@@ -2,11 +2,11 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 import Stripe from "stripe";
 
-if (!process.env["STRIPE_SECRET_KEY"]) {
+if (!process.env["STRIPE_SECRET_KEY_TEST"]) {
   throw new Error("Missing Stripe secret key");
 }
 
-const stripe = new Stripe(process.env["STRIPE_SECRET_KEY"], {
+const stripe = new Stripe(process.env["STRIPE_SECRET_KEY_TEST"], {
   apiVersion: "2020-08-27",
 });
 
@@ -28,15 +28,15 @@ export default async function handler(
             allowed_countries: ["US"],
           },
           // shipping_rates: ["shr_1JPwtaKnxKfZHThpPxgjhI86"],
-          shipping_options: [
-            {
-              shipping_rate: "shr_1JPwtaKnxKfZHThpPxgjhI86",
-            },
-            {
-              shipping_rate: "shr_1LQ9bIKnxKfZHThpH2EcDqqV",
-            },
-          ],
-          success_url: `${req.headers.origin}`,
+          // shipping_options: [
+          //   {
+          //     shipping_rate: "shr_1JPwtaKnxKfZHThpPxgjhI86",
+          //   },
+          //   {
+          //     shipping_rate: "shr_1LQ9bIKnxKfZHThpH2EcDqqV",
+          //   },
+          // ],
+          success_url: `${req.headers.origin}/order/success?session_id={CHECKOUT_SESSION_ID}`,
           cancel_url: `${req.headers.origin}/cart`,
         });
       res.status(200).json(session);
