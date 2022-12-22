@@ -4,11 +4,6 @@ import { ICartItem } from "../types";
 const cartReducer = (state: ICartItem[], action: IAction): ICartItem[] => {
   switch (action.type) {
     case "addToCart": {
-      // if (action.payload == null) {
-      //   throw new Error(
-      //     "Action payload can only be empty when calling emptyCart"
-      //   );
-      // }
       const cartItemExists = state.find(
         (cartItem) =>
           cartItem.product.productId === action.payload.product.productId

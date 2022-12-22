@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { connectToStripe, connectToTestStripe } from "../../lib/stripeUtils";
 import { GetServerSidePropsContext } from "next";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { CartContext } from "../../context/CartContext";
 
 export const getServerSideProps = async (
@@ -32,9 +32,12 @@ export const getServerSideProps = async (
 const Success = () => {
   const { cartState, updateCart } = useContext(CartContext);
 
-  updateCart(cartState, {
-    type: "emptyCart",
-  });
+  useEffect(() => {
+    updateCart(cartState, {
+      type: "emptyCart",
+      payload: null,
+    });
+  }, []);
 
   return (
     <>

@@ -105,7 +105,7 @@ export const getAllProductsWithPrices = async () => {
 };
 
 export const getProductWithPrice = async (id: string) => {
-  const stripe = connectToStripe();
+  const stripe = connectToTestStripe();
   const product = await stripe.products.retrieve(id);
 
   const pricesObject = await stripe.prices.list({ product: product.id });
