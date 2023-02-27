@@ -5,8 +5,8 @@ export const connectToStripe = () => {
   if (process.env["STRIPE_SECRET_KEY"] == undefined) {
     throw new Error("Missing Stripe secret key");
   }
-  return new Stripe(process.env["STRIPE_SECRET_KEY"], {
-    apiVersion: "2020-08-27",
+  return new Stripe(process.env["STRIPE_SECRET_KEY"]!, {
+    apiVersion: "2022-11-15",
   });
 };
 

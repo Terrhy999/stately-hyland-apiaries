@@ -55,15 +55,17 @@ export interface ICartItem {
   quantity: number;
 }
 
-export interface IAction {
-  type:
-    | "addToCart"
-    | "removeFromCart"
-    | "decreaseQuantity"
-    | "increaseQuantity"
-    | "setQuantity";
-  payload: ICartItem;
-}
+export type IAction =
+  | {
+      type:
+        | "addToCart"
+        | "removeFromCart"
+        | "decreaseQuantity"
+        | "increaseQuantity"
+        | "setQuantity";
+      payload: ICartItem;
+    }
+  | { type: "emptyCart"; payload: null };
 
 export interface IImageMetadata {
   _type: string;

@@ -12,7 +12,7 @@ const cartReducer = (state: ICartItem[], action: IAction): ICartItem[] => {
       if (cartItemExists) {
         newState = [...state].map((cartItem) => {
           if (cartItem.product.productId === cartItemExists.product.productId) {
-            cartItem.quantity = cartItem.quantity + action.payload.quantity;
+            cartItem.quantity = cartItem.quantity + action.payload?.quantity;
           }
           return cartItem;
         });
@@ -59,6 +59,11 @@ const cartReducer = (state: ICartItem[], action: IAction): ICartItem[] => {
         }
         return cartItem;
       });
+      return newState;
+      break;
+    }
+    case "emptyCart": {
+      const newState: ICartItem[] = [];
       return newState;
       break;
     }
