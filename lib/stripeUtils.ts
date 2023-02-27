@@ -124,9 +124,7 @@ export const getProductWithPrice = async (id: string) => {
       `Product ${product.name} has a missing or mistyped "productType" metadata, should only be 'honey' or 'candle'`
     );
   }
-  const lineItems = await stripe.checkout.sessions.listLineItems(session_id, {
-    limit: 100,
-  });
+
   if (product.metadata["productType"] === "honey") {
     if (
       product.metadata["honeyType"] == null ||
