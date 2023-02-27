@@ -17,10 +17,14 @@ export const getServerSideProps = async (
 
   const checkoutSession = await stripe.checkout.sessions.retrieve(session_id);
 
-  const shippingRate = await stripe.shippingRates.retrieve(
-    //@ts-ignore
-    checkoutSession.shipping_cost.shipping_rate
-  );
+  const get_shipping_rate = () => {
+    if (typeof checkoutSession.shipping_cost?.shipping_rate != "string") {
+      throw new Error("No shipping rate for this checkout");
+    }
+    return checkoutSession.shipping_cost?.shipping_rate;
+  };
+
+  const shippingRate = await stripe.shippingRates.retrieve(get_shipping_rate());
 
   return {
     props: {
@@ -53,14 +57,14 @@ const Success = ({ shipping_id }: { shipping_id: string }) => {
 
         {shipping_id == "shr_1MIYrkKnxKfZHThp0aTqPLGk" ? (
           <div className="py-2">
-            You've chosen local pickup, we'll reach out to you shortly to let
-            you know when your order is ready, then you can pick it up at 27
-            Marquette rd, Montclair NJ 07043.
+            You&apos;ve chosen local pickup, we&apos;ll reach out to you shortly
+            to let you know when your order is ready, then you can pick it up at
+            27 Marquette rd, Montclair NJ 07043.
           </div>
         ) : (
           <div className="py-2">
-            You've chosen USPS delivery, we will ship your order out shortly and
-            you will receive a tracking number when we do!
+            You&apos;ve chosen USPS delivery, we will ship your order out
+            shortly and you will receive a tracking number when we do!
           </div>
         )}
 

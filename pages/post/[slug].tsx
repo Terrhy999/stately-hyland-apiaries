@@ -3,12 +3,13 @@ import {
   GetStaticPropsContext,
   InferGetStaticPropsType,
 } from "next";
-import { Params } from "next/dist/server/router";
 import sanityClient from "../../lib/sanity";
-import { PortableText, PortableTextComponents } from "@portabletext/react";
+import { PortableText } from "@portabletext/react";
+import { PortableTextComponents } from "@portabletext/react";
 import PostImage from "../../components/postTools/PostImage";
 import { getFormattedDate } from "../../lib/utils";
 import { TypedObject } from "@portabletext/types";
+import { ParsedUrlQuery } from "querystring";
 
 interface IPostSlug {
   slug: {
@@ -24,8 +25,12 @@ interface ISanityPost {
   body: TypedObject[];
 }
 
+interface IParams extends ParsedUrlQuery {
+  slug: string;
+}
+
 export const getStaticProps = async (context: GetStaticPropsContext) => {
-  const { slug } = context.params as Params;
+  const { slug } = context.params as IParams;
   const post: ISanityPost = await sanityClient.fetch(
     `*[_type == 'post' && slug.current == '${slug}']{title, caption, _createdAt, body[]{
       ...,
