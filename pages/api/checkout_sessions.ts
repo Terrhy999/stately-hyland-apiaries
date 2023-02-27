@@ -19,14 +19,14 @@ export default async function handler(
     },
   ];
 
-  const shipping_options_test = [
-    {
-      shipping_rate: "shr_1MIYs2KnxKfZHThpqp9e7XLl",
-    },
-    {
-      shipping_rate: "shr_1MIYrkKnxKfZHThp0aTqPLGk",
-    },
-  ];
+  // const shipping_options_test = [
+  //   {
+  //     shipping_rate: "shr_1MIYs2KnxKfZHThpqp9e7XLl",
+  //   },
+  //   {
+  //     shipping_rate: "shr_1MIYrkKnxKfZHThp0aTqPLGk",
+  //   },
+  // ];
 
   if (req.method === "POST") {
     try {

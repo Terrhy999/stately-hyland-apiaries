@@ -18,6 +18,7 @@ export const getServerSideProps = async (
   const checkoutSession = await stripe.checkout.sessions.retrieve(session_id);
 
   const shippingRate = await stripe.shippingRates.retrieve(
+    //@ts-ignore
     checkoutSession.shipping_cost.shipping_rate
   );
 
