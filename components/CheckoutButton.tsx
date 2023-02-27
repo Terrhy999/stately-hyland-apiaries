@@ -19,15 +19,10 @@ const CheckoutButton = () => {
     quantity: item.quantity,
   }));
 
-  const testCartData = {
-    price: "price_1JNiw4KnxKfZHThpe4RISccD",
-    quantity: 2,
-  };
-
   const checkout = async (cartData: { price: string; quantity: number }[]) => {
     const res = await fetch("/api/checkout_sessions", {
       method: "POST",
-      body: JSON.stringify([testCartData]),
+      body: JSON.stringify(cartData),
     });
     const json = await res.json();
     const redirectUrl = json.url;

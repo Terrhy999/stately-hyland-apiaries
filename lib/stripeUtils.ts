@@ -5,17 +5,8 @@ export const connectToStripe = () => {
   if (process.env["STRIPE_SECRET_KEY"] == undefined) {
     throw new Error("Missing Stripe secret key");
   }
-  return new Stripe(process.env["STRIPE_SECRET_KEY"], {
-    apiVersion: "2020-08-27",
-  });
-};
-
-export const connectToTestStripe = () => {
-  if (process.env["STRIPE_SECRET_KEY_TEST"] == undefined) {
-    throw new Error("Missing Stripe secret key");
-  }
-  return new Stripe(process.env["STRIPE_SECRET_KEY_TEST"], {
-    apiVersion: "2020-08-27",
+  return new Stripe(process.env["STRIPE_SECRET_KEY"]!, {
+    apiVersion: "2022-11-15",
   });
 };
 
@@ -105,7 +96,7 @@ export const getAllProductsWithPrices = async () => {
 };
 
 export const getProductWithPrice = async (id: string) => {
-  const stripe = connectToTestStripe();
+  const stripe = connectToStripe();
   const product = await stripe.products.retrieve(id);
 
   const pricesObject = await stripe.prices.list({ product: product.id });
@@ -132,7 +123,9 @@ export const getProductWithPrice = async (id: string) => {
       `Product ${product.name} has a missing or mistyped "productType" metadata, should only be 'honey' or 'candle'`
     );
   }
-
+  const lineItems = await stripe.checkout.sessions.listLineItems(session_id, {
+    limit: 100,
+  });
   if (product.metadata["productType"] === "honey") {
     if (
       product.metadata["honeyType"] == null ||
