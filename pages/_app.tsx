@@ -2,6 +2,7 @@ import "../styles/globals.css";
 import Layout from "../components/Layout";
 import type { AppProps } from "next/app";
 import CartProvider from "../context/CartContext";
+import { Analytics } from "@vercel/analytics/react";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -9,6 +10,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Layout>
         <Component {...pageProps} />
       </Layout>
+      <Analytics />
     </CartProvider>
   );
 }
