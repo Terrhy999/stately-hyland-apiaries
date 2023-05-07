@@ -29,6 +29,7 @@ export interface IProduct {
     productType: "honey" | "candle";
     weightOz: number;
     honeyType: "light" | "dark" | "creamed" | "honeydew" | null;
+    stock?: number;
   };
 }
 

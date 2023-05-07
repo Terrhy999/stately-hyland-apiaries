@@ -54,38 +54,44 @@ const ProductPage = ({ product }: { product: IProduct }) => {
         </h2>
         <p className="text-xl">{getPriceLocaleString(product)}</p>
         <p className="py-5 text-lg flex-grow">{product.description}</p>
-        <div className="flex flex-col md:flex-row">
-          <div className="flex flex-row justify-between items-center text-center border bg-white border-black p-3 mb-3 md:mb-0 md:mr-3">
-            <span className="pl-2 pr-4">Quantity</span>
-            <div className="flex flex-row justify-center items-center">
-              <FaAngleLeft
-                className="mx-2 h-6 w-6 cursor-pointer hover:text-shaGreen"
-                onClick={() => setQuantity(quantity - 1)}
-              />
-              <input
-                type="numeric"
-                value={quantity}
-                className="w-6 text-center"
-                onChange={(e) => setQuantity(Number(e.target.value))}
-              />
-              <FaAngleRight
-                className="mx-2 h-6 w-6 cursor-pointer hover:text-shaGreen"
-                onClick={() => setQuantity(quantity + 1)}
-              />
-            </div>
+        {product.metadata.stock === 0 ? (
+          <div className="flex flex-row justify-center">
+            <span className="text-lg">Temporarily out of Stock</span>
           </div>
-          <button
-            className="bg-black text-white font-bold p-3 flex-grow hover:text-shaGreen"
-            onClick={() =>
-              updateCart(cartState, {
-                type: "addToCart",
-                payload: { product, quantity },
-              })
-            }
-          >
-            Add to Cart
-          </button>
-        </div>
+        ) : (
+          <div className="flex flex-col md:flex-row">
+            <div className="flex flex-row justify-between items-center text-center border bg-white border-black p-3 mb-3 md:mb-0 md:mr-3">
+              <span className="pl-2 pr-4">Quantity</span>
+              <div className="flex flex-row justify-center items-center">
+                <FaAngleLeft
+                  className="mx-2 h-6 w-6 cursor-pointer hover:text-shaGreen"
+                  onClick={() => setQuantity(quantity - 1)}
+                />
+                <input
+                  type="numeric"
+                  value={quantity}
+                  className="w-6 text-center"
+                  onChange={(e) => setQuantity(Number(e.target.value))}
+                />
+                <FaAngleRight
+                  className="mx-2 h-6 w-6 cursor-pointer hover:text-shaGreen"
+                  onClick={() => setQuantity(quantity + 1)}
+                />
+              </div>
+            </div>
+            <button
+              className="bg-black text-white font-bold p-3 flex-grow hover:text-shaGreen"
+              onClick={() =>
+                updateCart(cartState, {
+                  type: "addToCart",
+                  payload: { product, quantity },
+                })
+              }
+            >
+              Add to Cart
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

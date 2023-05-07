@@ -21,6 +21,7 @@ const ProductCard = ({ product }: { product: IProduct }) => {
           />
         </div>
       </Link>
+
       <div className="w-full flex flex-col items-center justify-between">
         <div className="w-full p-3">
           <Link href={`/products/${product.productId}`} passHref={true}>
@@ -29,17 +30,23 @@ const ProductCard = ({ product }: { product: IProduct }) => {
             </h4>
           </Link>
           <div className="mb-4">{getPriceLocaleString(product)}</div>
-          <button
-            className="bg-black text-white font-bold w-full p-2 hover:text-shaGreen"
-            onClick={() =>
-              updateCart(cartState, {
-                type: "addToCart",
-                payload: { product, quantity: 1 },
-              })
-            }
-          >
-            Add to Cart
-          </button>
+          {product.metadata.stock === 0 ? (
+            <div className="bg-black text-white font-bold w-full p-2 hover:text-shaGreen text-center">
+              Out of stock
+            </div>
+          ) : (
+            <button
+              className="bg-black text-white font-bold w-full p-2 hover:text-shaGreen"
+              onClick={() =>
+                updateCart(cartState, {
+                  type: "addToCart",
+                  payload: { product, quantity: 1 },
+                })
+              }
+            >
+              Add to Cart
+            </button>
+          )}
         </div>
       </div>
     </div>

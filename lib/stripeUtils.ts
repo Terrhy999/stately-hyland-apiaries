@@ -87,6 +87,7 @@ export const getAllProductsWithPrices = async () => {
         productType: product.metadata["productType"],
         weightOz: Number(product.metadata["weightOz"]),
         honeyType: product.metadata["honeyType"] || null,
+        stock: parseInt(product.metadata["stock"]!),
       },
     };
 
@@ -163,6 +164,7 @@ export const getProductWithPrice = async (id: string) => {
       weightOz: Number(product.metadata["weightOz"]),
       productType: product.metadata["productType"],
       honeyType: product.metadata["honeyType"] || null,
+      stock: parseInt(product.metadata["stock"]!),
     },
   };
   return productWithPrice;
