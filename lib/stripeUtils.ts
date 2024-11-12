@@ -40,7 +40,8 @@ export const getAllProductsWithPrices = async () => {
     if (
       product.metadata["productType"] == null ||
       (product.metadata["productType"] !== "honey" &&
-        product.metadata["productType"] !== "candle")
+        product.metadata["productType"] !== "candle" &&
+        product.metadata["productType"] !== "gift")
     ) {
       console.log(product);
       throw new Error(
@@ -117,7 +118,8 @@ export const getProductWithPrice = async (id: string) => {
   if (
     product.metadata["productType"] == null ||
     (product.metadata["productType"] !== "honey" &&
-      product.metadata["productType"] !== "candle")
+      product.metadata["productType"] !== "candle" &&
+      product.metadata["productType"] !== "gift")
   ) {
     console.log(product);
     throw new Error(

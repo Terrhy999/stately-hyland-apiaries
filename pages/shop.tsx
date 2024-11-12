@@ -62,18 +62,31 @@ const Shop = ({ products }: { products: IProduct[] }) => {
   //   return filteredProducts;
   // };
 
+  // const sortProductType = (a: IProduct, b: IProduct) => {
+  //   if (
+  //     a.metadata.productType === "honey" &&
+  //     b.metadata.productType === "candle"
+  //   )
+  //     return -1;
+  //   if (
+  //     a.metadata.productType === "candle" &&
+  //     b.metadata.productType === "honey"
+  //   )
+  //     return 1;
+  //   else return 0;
+  // };
+
   const sortProductType = (a: IProduct, b: IProduct) => {
-    if (
-      a.metadata.productType === "honey" &&
-      b.metadata.productType === "candle"
-    )
-      return -1;
-    if (
-      a.metadata.productType === "candle" &&
-      b.metadata.productType === "honey"
-    )
-      return 1;
-    else return 0;
+    const priorityOrder: { [key: string]: number } = {
+      gift: 1,
+      honey: 2,
+      candle: 3,
+    };
+
+    const typeA = a.metadata.productType;
+    const typeB = b.metadata.productType;
+
+    return (priorityOrder[typeA] || 4) - (priorityOrder[typeB] || 4);
   };
 
   const honeyTypeSort = {
