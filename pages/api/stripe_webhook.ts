@@ -75,7 +75,9 @@ export default async function handler(
         ? `${session.shipping_details.address.line1}, ${session.shipping_details.address.city}, ${session.shipping_details.address.country}`
         : "No shipping address";
 
-        const lineItems = session.line_items?.data.map(item => {
+        const lineItemsResponse = await stripe.checkout.sessions.listLineItems(session.id);
+
+        const lineItems = lineItemsResponse.data.map(item => {
           const quantity = item.quantity || 0;
           const name = item.description || "No Name";
           const price = item.amount_total / 100;
@@ -83,7 +85,7 @@ export default async function handler(
         }).join("\n") || "No line items";
 
         const totalAmount = (session.amount_total || 0) / 100;
-        const stripeLink = `https://dashboard.stripe.com/payments/${session.id}`;
+        const stripeLink = `https://dashboard.stripe.com/payments/${session.payment_intent}`;
 
         try {
           await sendPushNotification(
