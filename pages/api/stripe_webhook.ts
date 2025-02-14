@@ -2,6 +2,12 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { connectToStripe } from "../../lib/stripeUtils";
 import Stripe from "stripe";
 
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
 const stripe = connectToStripe();
 
 if(process.env["STRIPE_WEBHOOK_SECRET"] == undefined) {
@@ -30,10 +36,24 @@ export default async function handler(
     return res.status(400).send("Missing Stripe signature.");
   }
 
+  const rawBody = await new Promise<Buffer>((resolve, reject) => {
+    let data = '';
+
+    req.on('data', chunk => {
+      data += chunk;
+    });
+
+    req.on('end', () => {
+      resolve(Buffer.from(data));
+    });
+
+    req.on('error', (err) => reject(err));
+  });
+
   let event;
 
   try {
-    event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
+    event = stripe.webhooks.constructEvent(rawBody, sig, endpointSecret);
   } catch (err) {
     if (err instanceof Error) {
       console.error('Webhook signature verification failed.', err.message);
