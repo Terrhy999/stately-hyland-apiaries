@@ -8,7 +8,10 @@ export const getStaticProps = async () => {
   const posts: ISanityPost[] = await sanityClient.fetch(
     `*[_type == 'post' && (!isPreview || !defined(isPreview))]{title, _createdAt, caption, mainImage{..., asset->}, slug}`
   );
-  return { props: { posts } };
+  return {
+    props: { posts },
+    revalidate: 600,
+  };
 };
 
 const Home = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
