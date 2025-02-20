@@ -51,7 +51,7 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const postSlugs: IPostSlug[] = await sanityClient.fetch(
-    `*[_type == 'post']{slug}`
+    `*[_type == 'post' && (!isPreview || !defined(isPreview))]{slug}`
   );
 
   const paths = postSlugs.map((post) => ({
