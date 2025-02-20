@@ -1,8 +1,4 @@
-import {
-  GetStaticPaths,
-  GetStaticPropsContext,
-  InferGetStaticPropsType,
-} from "next";
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import sanityClient from "../../lib/sanity";
 import { PortableText } from "@portabletext/react";
 import { PortableTextComponents } from "@portabletext/react";
@@ -11,12 +7,12 @@ import { getFormattedDate } from "../../lib/utils";
 import { TypedObject } from "@portabletext/types";
 import { ParsedUrlQuery } from "querystring";
 
-interface IPostSlug {
-  slug: {
-    _type: "slug";
-    current: string;
-  };
-}
+// interface IPostSlug {
+//   slug: {
+//     _type: "slug";
+//     current: string;
+//   };
+// }
 
 interface ISanityPost {
   _createdAt: string;
@@ -29,7 +25,29 @@ interface IParams extends ParsedUrlQuery {
   slug: string;
 }
 
-export const getStaticProps = async (context: GetStaticPropsContext) => {
+// export const getStaticProps = async (context: GetStaticPropsContext) => {
+//   const { slug } = context.params as IParams;
+//   const post: ISanityPost = await sanityClient.fetch(
+//     `*[_type == 'post' && slug.current == '${slug}']{title, caption, _createdAt, body[]{
+//       ...,
+//       asset->
+//     }}[0]`
+//   );
+
+//   if (post.title == null) {
+//     throw new Error("title prop is null");
+//   }
+
+//   return {
+//     props: {
+//       post: post,
+//     },
+//   };
+// };
+
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
   const { slug } = context.params as IParams;
   const post: ISanityPost = await sanityClient.fetch(
     `*[_type == 'post' && slug.current == '${slug}']{title, caption, _createdAt, body[]{
@@ -49,20 +67,20 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
   };
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const postSlugs: IPostSlug[] = await sanityClient.fetch(
-    `*[_type == 'post']{slug}`
-  );
+// export const getStaticPaths: GetStaticPaths = async () => {
+//   const postSlugs: IPostSlug[] = await sanityClient.fetch(
+//     `*[_type == 'post' && (!isPreview || !defined(isPreview))]{slug}`
+//   );
 
-  const paths = postSlugs.map((post) => ({
-    params: { slug: post.slug.current },
-  }));
+//   const paths = postSlugs.map((post) => ({
+//     params: { slug: post.slug.current },
+//   }));
 
-  return {
-    paths,
-    fallback: false,
-  };
-};
+//   return {
+//     paths,
+//     fallback: false,
+//   };
+// };
 
 const portableTextComponents: Partial<PortableTextComponents> = {
   types: {
@@ -102,7 +120,9 @@ const portableTextComponents: Partial<PortableTextComponents> = {
   },
 };
 
-const Post = ({ post }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Post = ({
+  post,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
     <div className="prose prose-lg text-[19px] font-lato">
       <div className="mb-3">

@@ -1,17 +1,30 @@
 import Head from "next/head";
 import sanityClient from "../lib/sanity";
 import PostCard from "../components/PostCard";
-import { InferGetStaticPropsType } from "next";
+import { InferGetServerSidePropsType } from "next";
 import type { ISanityPost } from "../types";
 
-export const getStaticProps = async () => {
+// export const getStaticProps = async () => {
+//   const posts: ISanityPost[] = await sanityClient.fetch(
+//     `*[_type == 'post']{title, _createdAt, caption, mainImage{..., asset->}, slug}`
+//   );
+//   return { props: { posts } };
+// };
+
+export async function getServerSideProps() {
   const posts: ISanityPost[] = await sanityClient.fetch(
     `*[_type == 'post']{title, _createdAt, caption, mainImage{..., asset->}, slug}`
   );
-  return { props: { posts } };
-};
+  return {
+    props: {
+      posts,
+    },
+  };
+}
 
-const Home = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Home = ({
+  posts,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const sorted_posts = posts.sort(
     (a, b) => Date.parse(b._createdAt) - Date.parse(a._createdAt)
   );
