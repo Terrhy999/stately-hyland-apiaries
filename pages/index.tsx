@@ -32,7 +32,7 @@ const Home = ({
   return (
     <>
       <Head>
-        <title>Home - SHA</title>
+        <title>Preview - SHA</title>
       </Head>
       <div className="w-full">
         <h2 className="text-3xl font-lato font-bold pb-5">Blog Posts</h2>
