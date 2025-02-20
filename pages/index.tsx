@@ -6,7 +6,7 @@ import type { ISanityPost } from "../types";
 
 export const getStaticProps = async () => {
   const posts: ISanityPost[] = await sanityClient.fetch(
-    `*[_type == 'post']{title, _createdAt, caption, mainImage{..., asset->}, slug}`
+    `*[_type == 'post' && (!isPreview || !defined(isPreview))]{title, _createdAt, caption, mainImage{..., asset->}, slug}`
   );
   return { props: { posts } };
 };

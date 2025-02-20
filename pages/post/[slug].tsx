@@ -32,7 +32,7 @@ interface IParams extends ParsedUrlQuery {
 export const getStaticProps = async (context: GetStaticPropsContext) => {
   const { slug } = context.params as IParams;
   const post: ISanityPost = await sanityClient.fetch(
-    `*[_type == 'post' && slug.current == '${slug}']{title, caption, _createdAt, body[]{
+    `*[_type == 'post' && slug.current == '${slug}' && (!isPreview || !defined(isPreview))]{title, caption, _createdAt, body[]{
       ...,
       asset->
     }}[0]`
