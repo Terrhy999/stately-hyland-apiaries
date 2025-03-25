@@ -55,7 +55,7 @@ const Success = ({ shipping_id }: { shipping_id: string }) => {
           Thank you for your purchase from Stately Hyland Apiaries!
         </div>
 
-        {shipping_id == "shr_1MIYrkKnxKfZHThp0aTqPLGk" ? (
+        {shipping_id == "shr_1LQ9bIKnxKfZHThpH2EcDqqV" ? (
           <div className="py-2">
             You&apos;ve chosen local pickup, we&apos;ll reach out to you shortly
             to let you know when your order is ready, then you can pick it up at
